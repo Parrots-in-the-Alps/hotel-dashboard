@@ -8,11 +8,11 @@ export const useUserStore = defineStore('user', {
         }
     },
     actions: {
-        async login(credentials){
+        async login(credentials) {
             const token = (await apiRequester.post("/api/sanctum/token", credentials)).data
 
             // Use the token for all future requests
-            apiRequester.defaults.headers.common['Authorization'] = `Bearer ${ token }`;
+            apiRequester.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
             this.user = (await apiRequester.get("/api/user")).data
         }

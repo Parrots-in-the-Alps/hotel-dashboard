@@ -2,7 +2,7 @@
 	<div>
 		<h1>Login</h1>
 
-		<login-form />
+		<login-form/>
 	</div>
 </template>
 
@@ -10,7 +10,7 @@
 	import LoginForm from "./LoginForm.vue"
 
 	export default {
-		name:"LoginPage",
+		name: "LoginPage",
 		components: {LoginForm}
 	}
 </script>

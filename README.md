@@ -11,7 +11,7 @@ npm run preview # Preview the production build
 
 ## API changes
 
-Recommend to use cookie tokens: https://laravel.com/docs/10.x/sanctum#spa-authentication 
+Recommend to use cookie tokens: https://laravel.com/docs/10.x/sanctum#spa-authentication
 But only works when under the same domain...
 
 ```php

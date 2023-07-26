@@ -7,7 +7,7 @@
 <script>
 	export default {
 		name: "LoginForm",
-		data(){
+		data() {
 			return {
 				credentials: {
 					email: "",
@@ -16,7 +16,7 @@
 			}
 		},
 		methods: {
-			async login(){
+			async login() {
 				await this.$userStore.login(this.credentials)
 			}
 		}
