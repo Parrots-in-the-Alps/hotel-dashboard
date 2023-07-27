@@ -39,3 +39,11 @@ Route::post('/sanctum/token', function (Request $request) {
     return $user->createToken("")->plainTextToken;
 });
 ```
+
+
+
+```
+:style="{ color: $theme.colorPrimary }"
+
+color: v-bind("$theme.colorPrimary");
+```
