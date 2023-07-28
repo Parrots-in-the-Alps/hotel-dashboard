@@ -76,12 +76,17 @@ Vous pouvez tester son bon fonctionnement via un outil de test de requête comme
 
 ---
 
-## 3. Tour du projet et des outils disponibles
+## 3. Tour du projet et des outils disponibles (1h)
 
 // TODO
 // présentation des directives techniques (option API...)
+// Boîte à outils (pas réinventer la roue)
 
-https://antdv.com/components/overview/
+- https://antdv.com/components/overview/
+- https://antdv.com/docs/vue/customize-theme#seedtoken
+- https://antdv.com/theme-editor
+
+Composants automatiquement importés.
 
 ```
 :style="{ color: $theme.colorPrimary }"
@@ -99,18 +104,39 @@ this.$notification.info({
 > - Je comprends l'utilité de chaque fichier et comprends le code du projet.
 > - J'ai fait le tour de chaque composant de la librairie ant-design-vue et sais plus ou moins quels composants utiliser dans mes interfaces.
 
-## 4. Maquettage
+## 4. Maquettage (1j)
+
+Avant de plonger la tête dans le code, il est **nécessaire** de faire au minimum des wireframes, au mieux des maquettes.
+
+Selon le cahier des charges, il vous est demandé de faire des maquettes `high-fidelity` des pages de dashboard que vous allez réaliser.
+
+Vous avez de la chance, en plus de vous fournir une bibliothèque de composants, des thèmes ant-design prêts à l'emploi sont disponibles.
+Vu que vous avez fait le tour des composants `ant-design-vue`, vous avez une idée des éléments qui vont constituer vos pages.
+
+Réalisez vos maquettes à partir de ce template de la communauté Figma : https://www.figma.com/community/file/831698976089873405
+
+Voilà quelques ressources qui pourront vous aider pour l'UI et le maquettage :
+
+:rainbow: **Palettes de couleurs :**
+- https://daisyui.com/docs/themes/
+- https://daisyui.com/theme-generator/
+- https://colorhunt.co/
+- https://mycolor.space/
+- https://realtimecolors.com/
+- https://realtimecolors.com/palettes/
+
+:tv: **Exemples de dashboards et inspirations**
+- https://ui.shadcn.com/
+- https://dribbble.com/AlbanCrepel/collections/1899268-Dashboards (:warning: attention, ça vient de Dribbble, donc tout ne correspond pas tout à fait à des cas réels d'utilisation. Ça vous donne quand même une idée des éléments que contient un dashboard).
+
+> :golf: Preuve de travail
+> - Les maquettes sont réalisées et validées par le formateur
+
+## 5. Priorisation des tâches et développement
 
 // TODO
 
-https://daisyui.com/docs/themes/
-https://daisyui.com/theme-generator/
-
-https://ui.shadcn.com/
-(Dribbble warning) https://dribbble.com/AlbanCrepel/collections/1899268-Dashboards
-
-https://www.figma.com/community/file/831698976089873405
-
-## 5. Développement et priorisation des tâches
-
-// TODO
+> :golf: Preuves de travail
+> - Le site est fonctionnel et répond au cahier des charges
+>   - seulement l'équipe de l'hôtel peut se connecter et accéder au page de dashboards
+>   - les données sont pertinentes et présentées de manière intuitive
