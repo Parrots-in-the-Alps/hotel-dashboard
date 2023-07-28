@@ -16,7 +16,7 @@ const mapToken = defaultAlgorithm({
 
 export default {
     install(app, options) {
-        app.use(Antd)
+        app.use(Antd) // Use all components on-demand
 
         app.config.globalProperties.$theme = mapToken
     }

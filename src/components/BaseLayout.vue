@@ -1,4 +1,5 @@
 <template>
+	<!-- Base layout for all sub pages, put navbar and global elements here-->
 	<main>
 		<router-view/>
 	</main>

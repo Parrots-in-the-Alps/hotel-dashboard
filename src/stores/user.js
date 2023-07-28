@@ -14,6 +14,7 @@ export const useUserStore = defineStore('user', {
             // Use the token for all future requests
             apiRequester.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
+            // The user will be available in all our components via `this.$userStore.user` thanks to our custom appPlugin`
             this.user = (await apiRequester.get("/api/user")).data
         }
     }

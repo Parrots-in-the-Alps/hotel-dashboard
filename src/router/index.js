@@ -7,7 +7,7 @@ export const router = createRouter({
     routes: [
         {
             path: '/',
-            component: BaseLayout,
+            component: BaseLayout, // The root of all our components, where the fixed elements will be (navbar...)
             children: [
                 {
                     path: "",

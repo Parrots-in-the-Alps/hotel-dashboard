@@ -17,6 +17,8 @@
 		},
 		methods: {
 			async login() {
+				// TODO do some validations first
+
 				await this.$userStore.login(this.credentials)
 			}
 		}
