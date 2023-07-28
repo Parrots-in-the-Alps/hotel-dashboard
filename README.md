@@ -76,6 +76,7 @@ Ca y est, votre authentification est mise en place, on peut passer à un petit t
 ## 3. Tour du projet et des outils disponibles
 
 // TODO
+// présentation des directives techniques (option API...)
 
 https://antdv.com/components/overview/
 
@@ -91,10 +92,15 @@ this.$notification.info({
 })
 ```
 
+> Preuve de travail avant d'aller plus loin
+> - Je comprends l'utilité de chaque fichier et comprend le code du projet.
+> - J'ai fait le tour de chaque composant de la librairie ant-design-vue et sais plus ou moins quels composants utiliser dans mes interfaces.
+
 ## 4. Maquettage
 
 // TODO
 
+https://www.figma.com/community/file/831698976089873405
 
 ## 5. Développement et priorisation des tâches
 
