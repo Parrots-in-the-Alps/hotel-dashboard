@@ -78,21 +78,35 @@ Vous pouvez tester son bon fonctionnement via un outil de test de requête comme
 
 ## 3. Tour du projet et des outils disponibles (1h)
 
-// TODO
-// présentation des directives techniques (option API...)
-// Boîte à outils (pas réinventer la roue)
+Ce projet et le code déjà mis en place va vous permettre de développer efficacement votre dashboard.
 
-- https://antdv.com/components/overview/
-- https://antdv.com/docs/vue/customize-theme#seedtoken
-- https://antdv.com/theme-editor
+En effet, le but ici n'est pas de réinventer la roue (refaire un composant de Modal, faire un composant pour nos boutons, etc etc), 
+mais plutôt d'utiliser une boîte à outils qui va grandement nous aider pendant le développement : une bibliothèque de composants.
 
-Composants automatiquement importés.
+Le choix technique s'est porté sur `ant-design-vue`, que vous utiliserez pour vos interfaces : https://antdv.com/components/overview/
 
-```
-:style="{ color: $theme.colorPrimary }"
+Il s'agit d'un choix subjectif, mais qui est justifié par :
+- une popularité et une bonne maintenabilité
+- un choix complet de composants (dont des date-picker / range-picker intégrés, une validation des formulaires...)
+- une possibilité de customisation du thème :
+  - https://antdv.com/theme-editor
+  - https://antdv.com/docs/vue/customize-theme#seedtoken
 
-color: v-bind("$theme.colorPrimary");
-```
+:point_right: Faites un tour de chaque composant pour avoir une meilleure idée de ce que vous pourrez utiliser (cards, tables...).
+
+:point_right: Regarder le contenu de chaque fichier du projet et comprendre son utilité
+
+Voici quelques directives pour vous aider à comprendre le projet :
+- les composants `ant-design-vue` sont automatiquement importés, vous pouvez directement les utiliser dans vos templates
+- ce projet utilise l'**OPTION API** et non la COMPOSITION API de VueJs. Il vous est grandement recommandé d'utiliser l'option API, mais libre à vous de choisir quel style de code choisir, en s'assurant :
+  - que la syntaxe est **obligatoirement** comprise
+  - que votre choix soit appliqué dans **tous vos composants**
+
+Le style de votre thème peut s'appliquer de 2 manières différentes, toujours en utilisant la variable globale `$theme` déclarée dans `./src/plugins/antDesignPlugin.js` :
+- en appliquant le style en props d'un tag HTML ou d'un composant : `:style="{ color: $theme.colorPrimary }"`
+- en utilisant le binding dans votre css : `h1 { color: v-bind("$theme.colorPrimary"); }`
+
+Dernière petite chose, `ant-design-vue` ajoute aussi des méthodes accessibles globalement, comme celle pour afficher des notifications :
 
 ```js
 this.$notification.info({
@@ -102,7 +116,9 @@ this.$notification.info({
 
 > :golf: Preuves de travail avant d'aller plus loin
 > - Je comprends l'utilité de chaque fichier et comprends le code du projet.
-> - J'ai fait le tour de chaque composant de la librairie ant-design-vue et sais plus ou moins quels composants utiliser dans mes interfaces.
+> - J'ai fait le tour de chaque composant de la bibliothèque `ant-design-vue` et sais plus ou moins quels composants utiliser dans mes interfaces.
+
+---
 
 ## 4. Maquettage (1j)
 
@@ -132,11 +148,36 @@ Voilà quelques ressources qui pourront vous aider pour l'UI et le maquettage :
 > :golf: Preuve de travail
 > - Les maquettes sont réalisées et validées par le formateur
 
+---
+
 ## 5. Priorisation des tâches et développement
 
-// TODO
+Selon votre dossier de conception, vous allez devoir prioriser les tâches pour votre développement :
+- s'attarder d'abord sur les fonctionnalités et ensuite sur le style ?
+- s'attarder sur les KPI du dashboard ou sur l'export PDF ?
+
+:point_right: À vous de bien définir vos priorités.
+
+Il vous est conseillé ces choix techniques :
+- **apexchart** pour les graphiques (pie chart, line chart...)
+  - https://github.com/apexcharts/vue3-apexcharts
+  - https://apexcharts.com/vue-chart-demos/
+  - https://apexcharts.com/javascript-chart-demos/dashboards/modern/
+- **html2pdf** pour l'export pdf 
+  - https://github.com/eKoopmans/html2pdf.js
 
 > :golf: Preuves de travail
 > - Le site est fonctionnel et répond au cahier des charges
 >   - seulement l'équipe de l'hôtel peut se connecter et accéder au page de dashboards
 >   - les données sont pertinentes et présentées de manière intuitive
+
+---
+
+## 6. BONUS - appli bureau avec Tauri (1j)
+
+**Seulement** si le temps vous le permet, faites en sorte de réutiliser votre appli web en la convertissant en application de bureau avec Tauri.js.
+
+Vous pouvez consulter cette ressource sur la documentation officielle : https://tauri.app/fr/v1/guides/getting-started/setup/integrate
+
+> :golf: Preuves de travail
+> - Votre tableau de bord est accessible via une application bureau
