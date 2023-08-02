@@ -4,7 +4,7 @@
       Dashboards
       <DownOutlined />
     </a>
-  
+    <template #overlay>
       <a-menu>
         <a-menu-item key="0">
           <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
@@ -18,7 +18,7 @@
         </a-menu-item>
         <a-menu-item key="3">Dashboard Tactique</a-menu-item>
       </a-menu>
- 
+    </template>
   </a-dropdown>
 	<main>
 		<router-view/>
