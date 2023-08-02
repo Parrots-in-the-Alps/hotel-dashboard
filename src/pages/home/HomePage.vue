@@ -1,6 +1,13 @@
 <template>
 	<div>
-	   <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+	    <a-row>
+      <a-col :span="12">
+		<Card title="Le pipi c'est délicieux">
+		<apexchart  type="bar" :options="chartOptions" :series="series"></apexchart>
+	   </Card>
+      </a-col>
+    </a-row>
+	  
 	</div>
 	  
 </template>
