@@ -1,22 +1,65 @@
 <template>
   <div class="navbar">
-    <a-row type="flex" justify="space-between">
-      <a-col :span="6">
+      <div class="leftDiv">
+        <DropDown @setTitle="this.setTitle" />
+      </div>
+      <div class="centerDiv">
+          {{ this.title }}
+      </div>
+      <div class="rightDiv">
         <DropDown />
-      </a-col>
-      <a-col :span="12">
-
-      </a-col>
-    </a-row>
+      </div>
   </div>
 </template>
 
 <script>
+import { stringType } from "ant-design-vue/es/_util/type";
 import DropDown from "../Buttons/DropDown.vue"
 export default {
-  name: "NavBar"
+  name: "NavBar",
+  data() {
+    return {
+      title: 'ACCUEIL'
+    }
+  },
+  methods: {
+    setTitle(title) {
+      this.title = title;
+    }
+  }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+.leftDiv {
+  display: flex;
+  justify-content: start;
+  width: 25%;
+  font-size: 1rem;
+  color: #FF9800;
+}
+
+.centerDiv {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: #FF9800;
+}
+
+.rightDiv {
+  display: flex;
+  justify-content: end;
+  width: 25%;
+  font-size: 1rem;
+  color: #FF9800;
+}
+
+.row{
+  height:5rem;
+}
+
+</style>
 
