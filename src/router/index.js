@@ -1,5 +1,8 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import BaseLayout from '../components/BaseLayout.vue'
+import NavBar from '../components/commons/NavBar.vue'
+import Ops from '/home/pierre/projects/hotel-dashboard/src/pages/Dashboards/Ops.vue'
+import Tactics from '../pages/Dashboards/Tactics.vue'
+import Strategics from '../pages/Dashboards/Strategics.vue'
 import HomePage from '../pages/home/HomePage.vue'
 
 export const router = createRouter({
@@ -7,12 +10,27 @@ export const router = createRouter({
     routes: [
         {
             path: '/',
-            component: BaseLayout, // The root of all our components, where the fixed elements will be (navbar...)
+            component: NavBar, // The root of all our components, where the fixed elements will be (navbar...)
             children: [
                 {
-                    path: "",
+                    path: "/home",
                     name: "home",
                     component: HomePage
+                },
+                {
+                    path: "/ops",
+                    name: "ops",
+                    component: Ops
+                },
+                {
+                    path: "/tactics",
+                    name: "tactics",
+                    component: Tactics
+                },
+                {
+                    path: "/strategics",
+                    name: "strategics",
+                    component: Strategics
                 }
             ]
         },

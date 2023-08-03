@@ -1,5 +1,6 @@
 <template>
 	<!-- Our custom theme is provided here for our whole app-->
+	
 	<a-config-provider :theme="{ token: $options.customTheme }">
 		<RouterView/>
 	</a-config-provider>
