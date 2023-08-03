@@ -1,8 +1,10 @@
 <template>
     <a-dropdown>
         <a class="ant-dropdown-link" @click.prevent>
-            Dashboards
-            <DownOutlined />
+            <p class="dropdownstyle">
+                Dashboards 
+            </p>
+            
         </a>
         <template #overlay>
             <a-menu >
@@ -42,7 +44,9 @@ export default {
 </script>
     
 <style scoped>
-
+.dropdownstyle{
+    
+}
 
 </style>
     
