@@ -6,7 +6,15 @@
 		<apexchart  type="bar" :options="chartOptions" :series="series"></apexchart>
 	   </Card>
       </a-col>
+      <a-col :span="12">
+        <Card title="Le pipi c'est délicieux en barre">
+        <RadialBar :series="[71, 63, 77]"></RadialBar>
+        </Card>
+
+      </a-col>
     </a-row>
+
+
 	  
 	</div>
 	  
@@ -21,7 +29,7 @@
       return {
         chartOptions: {
           chart: {
-            id: 'vuechart-example'
+            id: 'ZOUNGOU'
           },
           xaxis: {
             categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]

@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<input v-model="credentials.email" type="text" placeholder="Email" class="flex  input input-bordered w-full max-w-xs self-center"/>
-		<input v-model="credentials.password" type="password" placeholder="Password" class="input input-bordered w-full max-w-xs self-center"/>
+		<input v-model="credentials.email" type="text" placeholder="Email"/>
+		<input v-model="credentials.password" type="password" placeholder="Password"/>
 		<a-button type="primary" @click="login">Login</a-button>
 	</div>
 </template>
