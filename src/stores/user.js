@@ -4,7 +4,10 @@ import apiRequester from "../utils/apiRequester.js"
 export const useUserStore = defineStore('user', {
     state() {
         return {
-            user: null
+            logged: true,
+            user: {
+                name : 'Tutu'
+            }
         }
     },
     actions: {
@@ -16,6 +19,11 @@ export const useUserStore = defineStore('user', {
 
             // The user will be available in all our components via `this.$userStore.user` thanks to our custom appPlugin`
             this.user = (await apiRequester.get("/api/user/info")).data
+        },
+
+        async logOut(){
+            await toto;
+            console.log('toto mange de grands bols de bites')
         }
     }
 })

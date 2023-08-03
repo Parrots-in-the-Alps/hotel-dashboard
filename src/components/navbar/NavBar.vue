@@ -1,20 +1,20 @@
 <template>
   <div class="navbar">
       <div class="leftDiv">
-        <DropDown @setTitle="this.setTitle" />
+        <DropDown @setTitle="this.setTitle"/>
       </div>
       <div class="centerDiv">
           {{ this.title }}
       </div>
       <div class="rightDiv">
-        <DropDown />
+        <UserNavBar />
       </div>
   </div>
 </template>
 
 <script>
-import { stringType } from "ant-design-vue/es/_util/type";
-import DropDown from "../Buttons/DropDown.vue"
+import DropDown from "../navbar/elements/DropDown.vue"
+import UserNavBar from "../navbar/elements/UserNavBar.vue"
 export default {
   name: "NavBar",
   data() {
@@ -36,6 +36,7 @@ export default {
   display: flex;
   justify-content: start;
   width: 25%;
+  font-family: 'Cinzel', serif;
   font-size: 1rem;
   color: #FF9800;
 }
@@ -53,13 +54,9 @@ export default {
   display: flex;
   justify-content: end;
   width: 25%;
+  font-family: 'Cinzel', serif;
   font-size: 1rem;
   color: #FF9800;
 }
-
-.row{
-  height:5rem;
-}
-
 </style>
 
