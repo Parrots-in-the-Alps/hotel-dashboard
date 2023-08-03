@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import BaseLayout from '../pages/BaseLayout.vue'
-import Ops from '/home/pierre/projects/hotel-dashboard/src/pages/Dashboards/Ops.vue'
+import Ops from '../pages/Dashboards/Ops.vue'
 import Tactics from '../pages/Dashboards/Tactics.vue'
 import Strategics from '../pages/Dashboards/Strategics.vue'
 import HomePage from '../pages/home/HomePage.vue'
