@@ -1,7 +1,7 @@
 <template>
     <div id="chart">
         <div id="chart-timeline">
-            <apexchart type="area" height="350" ref="chart" :options="chartOptions" :series="series"></apexchart>
+            <apexchart type="area" ref="chart" :options="chartOptions" :series="series"></apexchart>
         </div>
     </div>
 </template>
@@ -20,8 +20,6 @@ export default {
             chartOptions: {
                 chart: {
                     id: 'area-datetime',
-                    type: 'area',
-                    height: 350,
                     zoom: {
                         autoScaleYaxis: true
                     }
@@ -52,9 +50,6 @@ export default {
                             }
                         }
                     }]
-                },
-                dataLabels: {
-                    enabled: false
                 },
                 markers: {
                     size: 0,
