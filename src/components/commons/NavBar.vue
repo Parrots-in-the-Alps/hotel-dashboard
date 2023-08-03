@@ -6,9 +6,6 @@
       </a-col>
     </a-row>
   </div>
-  <main>
-    <router-view />
-  </main>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import NavBar from '../components/commons/NavBar.vue'
+import BaseLayout from '../pages/BaseLayout.vue'
 import Ops from '/home/pierre/projects/hotel-dashboard/src/pages/Dashboards/Ops.vue'
 import Tactics from '../pages/Dashboards/Tactics.vue'
 import Strategics from '../pages/Dashboards/Strategics.vue'
@@ -10,10 +10,10 @@ export const router = createRouter({
     routes: [
         {
             path: '/',
-            component: NavBar, // The root of all our components, where the fixed elements will be (navbar...)
+            component: BaseLayout, // The root of all our components, where the fixed elements will be (navbar...)
             children: [
                 {
-                    path: "/home",
+                    path: "",
                     name: "home",
                     component: HomePage
                 },

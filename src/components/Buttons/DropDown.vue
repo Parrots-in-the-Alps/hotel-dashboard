@@ -7,7 +7,7 @@
         <template #overlay>
             <a-menu>
                 <a-menu-item key="0">
-                    <router-link to="/home">
+                    <router-link to="/">
                         Home
                     </router-link>
                 </a-menu-item>
