@@ -1,18 +1,18 @@
 <template>
     <div id="chart">
-        <apexchart type="pie" width="380" :options="chartOptions" :series="series" ></apexchart>
+        <apexchart type="donut" width="380" :options="chartOptions" :series="series" ></apexchart>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'Pie',
+    name: 'Donut',
     data() {
         return {
           chartOptions: {
             chart: {
               width: 380,
-              type: 'pie',
+              type: 'donut',
             },
             responsive: [{
               breakpoint: 480,
