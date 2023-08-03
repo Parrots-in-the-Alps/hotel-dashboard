@@ -45,7 +45,17 @@ export default {
     
 <style scoped>
 .dropdownstyle{
-    
+    display:block;
+    padding: 0.4rem;
+    border: solid;
+    border-color: #FF9800;
+    border-radius: 1rem;
+    margin:0rem;
+}
+
+.dropdownstyle:hover{
+    color:#243236;
+    background-color: #FF9800 ;
 }
 
 </style>

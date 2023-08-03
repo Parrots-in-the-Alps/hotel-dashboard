@@ -35,6 +35,7 @@ export default {
 .leftDiv {
   display: flex;
   justify-content: start;
+  align-content:center;
   width: 25%;
   font-family: 'Cinzel', serif;
   font-size: 1rem;
