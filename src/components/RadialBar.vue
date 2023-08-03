@@ -18,6 +18,10 @@ export default {
     series: {
       type: Array,
       required: true,
+    },
+    labels: {
+      type: Array,
+      required: true,
     }
   },
   data: function () {
@@ -31,7 +35,7 @@ export default {
           inverseOrder: true,
 
         },
-        labels: ['Luxe', 'Standard', 'Suite'],
+        labels: this.labels,
       },
     }
   },
