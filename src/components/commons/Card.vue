@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :title="title">
+    <a-card :title="title" style="box-shadow: 2px 2px 3px black" bodyStyle="background-color: #607D8B;">
       <slot></slot>
     </a-card>
   </div>
