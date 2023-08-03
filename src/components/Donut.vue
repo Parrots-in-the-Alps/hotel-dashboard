@@ -1,6 +1,6 @@
 <template>
     <div id="chart">
-        <apexchart type="donut" width="380" :options="chartOptions" :series="series" ></apexchart>
+        <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
@@ -10,18 +10,21 @@ export default {
     data() {
         return {
           chartOptions: {
-            chart: {
-              width: 380,
-              type: 'donut',
-            },
-            responsive: [{
-              breakpoint: 480,
-              options: {
-                legend: {
-                  position: 'bottom'
+            labels: this.labels, 
+            //si on indique pas ici qu'il doit utiliser les labels qu'on lui passe en paramètre de composant, comme il ne sont pas indiqués dans le apexchart du template (ce qui est le cas dans la doc) alors il n'affichera pas les labels
+            plotOptions: {
+              pie: {
+                donut: {
+                  labels: { //text au centre du donut
+                    show: true,
+                    total: {
+                      showAlways: true, //toujours afficher
+                      show: true //afficher ou non
+                    }
+                  }
                 }
               }
-            }]
+            },
           },
         }
     },
