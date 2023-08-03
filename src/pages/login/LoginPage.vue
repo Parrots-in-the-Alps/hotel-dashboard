@@ -1,12 +1,10 @@
 <template>
 	<div class="centered-container">
-		<a-row>
-      <a-col :span="12">
+	
 		<Card title="login">
 		<LoginForm/>
 	</Card>
-	  </a-col>
-		</a-row>
+	  
 	</div>
 </template>
 
