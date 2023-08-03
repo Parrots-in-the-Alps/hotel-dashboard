@@ -13,7 +13,16 @@
 
       </a-col>
     </a-row>
+   
+    <a-row>
 
+<a-col :span="12">
+  <Card title="chambre occupées"><Table type="occupied"></Table></Card></a-col>
+
+
+<a-col :span="12">
+  <Card title="chambre disponibles"><Table type="free"></Table></Card></a-col>
+</a-row>
 
 	  
 	</div>
