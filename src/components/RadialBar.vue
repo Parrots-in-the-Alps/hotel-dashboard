@@ -34,10 +34,6 @@
     },
     labels: ['Luxe', 'Standard', 'Suite'],
   },
-
-  //remplacer series par le call API 
-  
-
       }
     },
 
