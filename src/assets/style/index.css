@@ -28,6 +28,19 @@ body {
     overflow-x: hidden;
 }
 
+
+
 .navbar{
+    display:flex;
+    height: 5rem;
     background-color: #243236;
+    padding: 1rem;
+    align-items: center;
 }
+
+.dropdown {
+    background-color: #243236;
+    color: #FF9800;
+}
+
+

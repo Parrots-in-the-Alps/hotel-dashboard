@@ -1,26 +1,26 @@
 <template>
-    <a-dropdown >
+    <a-dropdown>
         <a class="ant-dropdown-link" @click.prevent>
             Dashboards
             <DownOutlined />
         </a>
         <template #overlay>
-            <a-menu>
-                <a-menu-item key="0">
+            <a-menu >
+                <a-menu-item key="0"  class="dropdown" @click="this.setParentTitle('ACCUEIL')">
                     <router-link to="/">
-                        Home
+                        Accueil
                     </router-link>
                 </a-menu-item>
-                <a-menu-item key="1">
+                <a-menu-item key="1" class="dropdown" @click="this.setParentTitle('DASHBOARD OPERATIONNEL')">
                     <router-link to="ops">
                         Dashboard Opérationnel
                     </router-link>
                 </a-menu-item>
-                <a-menu-item key="2">
+                <a-menu-item key="2" class="dropdown" @click="this.setParentTitle('DASHBOARD TACTIQUE')">
                     <router-link to="tactics">
                         Dashboard Tactique
                     </router-link></a-menu-item>
-                <a-menu-item key="3">
+                <a-menu-item key="3" class="dropdown" @click="this.setParentTitle('DASHBOARD STRATEGIQUE')">
                     <router-link to="strategics">
                         Dashboard Stratégique
                     </router-link></a-menu-item>
@@ -31,11 +31,18 @@
     
 <script>
 export default {
-    name: "DropDown"
+    name: "DropDown",
+    emits: ['setTitle'],
+    methods: {
+        setParentTitle(title){
+            this.$emit('setTitle',title);
+        }
+    }
 }
 </script>
     
 <style scoped>
-   
+
+
 </style>
     
