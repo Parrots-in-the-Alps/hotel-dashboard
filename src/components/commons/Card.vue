@@ -22,7 +22,6 @@ export default {
 </script>
 <style scoped>
 .card {
-  height: fit-content;
   padding:0px;
 }
 </style>

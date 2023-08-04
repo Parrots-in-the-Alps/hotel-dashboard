@@ -62,6 +62,7 @@ export default {
 .content {
     display: flex;
     flex-direction: row;
+    column-gap:1rem;
 }
 
 .separator {
@@ -88,7 +89,7 @@ export default {
 
 .text {
     font-family: cinzel;
-    font-size: 5rem;
+    font-size: 7.5rem;
     text-align: center;
 }
 </style>
