@@ -8,7 +8,7 @@
       </a-col>
       <a-col :span="12">
         <Card title="Le pipi c'est délicieux en RadialBar">
-          <RadialBar :series="[71, 63, 77]"></RadialBar>
+          <RadialBar :labels="['standard', 'luxe', 'suite']" :series="[71, 63, 77]"></RadialBar>
         </Card>
       </a-col>
     </a-row>
