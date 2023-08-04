@@ -8,19 +8,19 @@
         </div>
 
         <div class="container-row-evenly mb-25">
-            <Card class="gap-20" title="Temps entre réservation et check-in moyen">
+            <Card class="gap-20 mb-25" title="Temps entre réservation et check-in moyen">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1' ,data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
             </Card>
-            <Card class="gap-20" title="Temps d'accueil moyen">
+            <Card class="gap-20 mb-25" title="Temps d'accueil moyen">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
             </Card>
-            <Card class="gap-20" title="Taux de remplissage moyen">
+            <Card class="gap-20 mb-25" title="Taux de remplissage moyen">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
             </Card>
         </div>
 
         <div class="container-unique mb-25">
-            <Card class="height" title="Temps de remplissage">
+            <Card class="height mb-25" title="Temps de remplissage">
                 <Line :height="'230px'" :width="'1300px'" :colors="['#00E396', '#F5222D']" class="blabla" :series="[{ data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }]"></Line>
             </Card>
         </div>
@@ -28,10 +28,10 @@
         <!-- TODO: faire des media query pour les width des graphs en longeurs -->
 
         <div class="container-row-around">
-            <Card title="Temps entre réservation et check-in moyen">
+            <Card title="Temps entre réservation et check-in moyen" class="mb-25">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
             </Card>
-            <Card title="Temps entre réservation et check-in moyen">
+            <Card title="Temps entre réservation et check-in moyen" class="mb-25">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
             </Card>
         </div>

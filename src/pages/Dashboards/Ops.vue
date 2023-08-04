@@ -1,5 +1,6 @@
 <template>
         <FluxClient/>
+        toto
 </template>
     
 <script>
