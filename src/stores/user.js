@@ -4,7 +4,7 @@ import apiRequester from "../utils/apiRequester.js"
 export const useUserStore = defineStore('user', {
     state() {
         return {
-            logged: false,
+            logged: true,
             user: {
                 name : 'Tutu'
             }
