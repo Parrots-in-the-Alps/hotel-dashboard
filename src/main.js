@@ -12,8 +12,9 @@ import appPlugin from "./plugins/appPlugin.js"
 import antDesignPlugin from "@/plugins/antDesignPlugin.js"
 
 const app = createApp(App)
+export const pinia = createPinia()
 
-app.use(createPinia())
+app.use(pinia)
     .use(router)
     .use(antDesignPlugin)
     .use(appPlugin)
