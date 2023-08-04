@@ -1,18 +1,22 @@
 <template>
-        <FluxClient/>
-        toto
+    <div class="layout">
+        <FluxClient />
+        <FluxResto />
+    </div>
 </template>
     
 <script>
 import FluxClient from '../../components/dashboards/ops/FluxClient.vue'
-import Area from '../../components/commons/chart/Area.vue'
-import Donut from '../../components/commons/chart/Donut.vue'
-import LineColumn from '../../components/commons/chart/LineColumn.vue'
+import FluxResto from '../../components/dashboards/ops/FluxResto.vue'
 export default {
     name: "Ops"
 }
 </script>
     
 <style scoped>
-
+.layout {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
 </style>
