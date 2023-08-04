@@ -1,11 +1,12 @@
 <template>
+  <button type="button" class="gap-20" @click="onClick">Download to PDF</button>
   <a-row>
     <a-col :span="20"></a-col>
     <a-col :span="4">
       <a-range-picker v-model:value="value1" class="card" format="MM-DD-YYYY" />
     </a-col>
   </a-row>
-
+<div id="tactic_dashboard">
   <a-row>
     <a-col :span="24">
       <Card title="Réservations" class="card">
@@ -98,10 +99,12 @@
       </Card>
     </a-col>
   </a-row>
+</div>
 </template>
     
 <script>
 import { Card } from 'ant-design-vue';
+import html2pdf from "html2pdf.js";
 
 export default {
   name: "Tactics",
@@ -111,6 +114,19 @@ export default {
       value1: null
     }
   },
+  methods: {
+        onChange(date, dateString) {
+            //   console.log(date, dateString);
+        },
+        onClick() {
+            const tactic_dashboard = document.getElementById('tactic_dashboard');
+            html2pdf(tactic_dashboard, {
+                // margin: 1,
+                jsPDF: { unit: "in", format: "b4", orientation: "l" },
+                filename: "toto_fait_des_pdf_avec_son_nez.pdf"
+            });
+        }
+    },
 }
 </script>
     
