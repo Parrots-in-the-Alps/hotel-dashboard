@@ -98,12 +98,14 @@ export default {
 .error {
     border-color: #00E396;
     border-inline-end-width: 1px;
+    border-width: 2px;
     box-shadow: 0 0 0 2px rgba(255,38,5,.06);
     outline: 0;
 }
 
 .success {
     border-color: #F5222D;
+    border-width: 2px;
     border-inline-end-width: 1px;
     box-shadow: 0 0 0 2px rgba(255,38,5,.06);
     outline: 0;
