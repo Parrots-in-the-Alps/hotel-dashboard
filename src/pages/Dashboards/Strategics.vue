@@ -1,10 +1,11 @@
 <template>
-    <div class="container-column">
+    <div class="container-column" id="strategics_dashboard">
 
         <div class="month-picker mb-25">
             <a-month-picker class="gap-20 error" placeholder="Mois précédent" @change="onChange" />
             <p class="gap-20">Par rapport à</p>
             <a-month-picker class="gap-20 success" placeholder="Mois en cours" @change="onChange" />
+            <button type="button" class="gap-20" @click="onClick">Download to PDF</button>
         </div>
 
         <div class="container-row-evenly mb-25">
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+import html2pdf from "html2pdf.js";
 
 export default {
     name: "Strategics",
@@ -63,8 +65,17 @@ export default {
         onChange(date, dateString) {
             //   console.log(date, dateString);
         },
+        onClick() {
+            const strategics_dashboard = document.getElementById('strategics_dashboard');
+            html2pdf(strategics_dashboard, {
+                // margin: 1,
+                jsPDF: { unit: "in", format: "b4", orientation: "l" },
+                filename: "toto_fait_des_pdf_avec_son_nez.pdf"
+            });
+        }
     },
 }
+
 </script>
     
 <style scoped>
