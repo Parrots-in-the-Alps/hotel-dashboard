@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="gap-20" @click="onClick">Download to PDF</button>
+  <button type="button" class="gap-20"  @click="onClick">Download to PDF</button>
   <a-row>
     <a-col :span="20"></a-col>
     <a-col :span="4">
@@ -11,8 +11,8 @@
     <a-col :span="24">
       <Card title="Réservations" class="card">
         <a-row class="centered-row">
-          <a-col :span="8">
-            <RadialBar :labels="['remplissage actuel']" :series="[71]"></RadialBar>
+          <a-col :span="6">
+            <RadialBar :labels="['occupation']"  :series="[71]"></RadialBar>
           </a-col>
           <a-col :span="16">
             <div class="element">Temps d'acceuil moyen : 3 Min</div>
@@ -91,7 +91,7 @@
       <Card title="Evolution du panier moyen" class="card">
         <a-row>
           <a-col :span="10">
-            <Area :height="'100%'" :width="'1230px'"
+            <Area :height="'100%'" :width="'230%'"
               :labels="['8/3/2023', '8/4/2023', '8/5/2023', '8/6/2023', '8/7/2023']"
               :series="[{ data: [44, 55, 41, 17, 15] }]"></Area>
           </a-col>
@@ -123,7 +123,8 @@ export default {
             html2pdf(tactic_dashboard, {
                 // margin: 1,
                 jsPDF: { unit: "in", format: "b4", orientation: "l" },
-                filename: "toto_fait_des_pdf_avec_son_nez.pdf"
+                filename: "toto_fait_des_pdf_avec_son_nez.pdf",
+                pagebreak: {mode: 'avoid-all'}
             });
         }
     },
@@ -148,12 +149,13 @@ export default {
 }
 
 .element {
-  margin: 125px;
-  font-size: 24px;
+  margin: 30px;
+  font-size: 20px;
   /* Ajustez la valeur de la marge selon vos préférences */
 }
 
 .card {
   margin-bottom: 50px;
+
 }
 </style>
