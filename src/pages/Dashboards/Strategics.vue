@@ -68,7 +68,6 @@ export default {
         onClick() {
             const strategics_dashboard = document.getElementById('strategics_dashboard');
             html2pdf(strategics_dashboard, {
-                // margin: 1,
                 jsPDF: { unit: "in", format: "b4", orientation: "l" },
                 filename: "toto_fait_des_pdf_avec_son_nez.pdf"
             });
