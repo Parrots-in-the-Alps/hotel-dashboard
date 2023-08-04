@@ -3,7 +3,7 @@
         <div id="username">
             {{ this.$userStore.user.name }}
         </div>
-        <div @click="this.$userStore.logOut()" id="logout">
+        <div @click="logout" id="logout">
             logout
         </div>
    </div>
@@ -28,9 +28,12 @@ export default {
     // computed : {
     //     ...mapState(app.config.globalProperties.$userStore, ['logged', 'user'])
     // },
-    // methods: {
-    //     ...mapState(useUserStrore, ['logOut'])
-    //     }
+    methods: {
+        logout(){
+            this.$userStore.logOut();
+            this.$emit('resetTitle');
+        }
+    }
 }
 </script>
     

@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import apiRequester from "../utils/apiRequester.js"
+import { router } from '../router/index.js'
 
 export const useUserStore = defineStore('user', {
     state() {
@@ -20,11 +21,13 @@ export const useUserStore = defineStore('user', {
             // The user will be available in all our components via `this.$userStore.user` thanks to our custom appPlugin`
             this.user = (await apiRequester.get("/api/user/info")).data
             this.logged = true;
+            router.push({ path: '/tactics' })
             console.log(this)
         },
 
         async logOut(){
             this.logged = false;
+            router.push({ path: '/login' })
             console.log('toto mange de grands bols de bites')
         }
     }

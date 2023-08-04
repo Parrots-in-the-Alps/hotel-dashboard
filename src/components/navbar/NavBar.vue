@@ -7,7 +7,7 @@
           {{ this.title }}
       </div>
       <div class="rightDiv">
-        <UserNavBar />
+        <UserNavBar @resetTitle="resetTitle"/>
       </div>
   </div>
 </template>
@@ -19,12 +19,17 @@ export default {
   name: "NavBar",
   data() {
     return {
-      title: 'ACCUEIL'
+      title: 'login'
     }
   },
   methods: {
     setTitle(title) {
+      if(this.$userStore.logged == true){
       this.title = title;
+      }
+    },
+    resetTitle() {
+      this.title = 'login';
     }
   }
 }
