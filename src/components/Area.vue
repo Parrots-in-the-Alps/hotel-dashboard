@@ -1,7 +1,7 @@
 <template>
 
         <div>
-        <apexchart type="area" height="100%" width="1230px" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="area" :width="width" :height="height"  :options="chartOptions" :series="series"></apexchart>
     </div>
 
 </template>
@@ -35,6 +35,12 @@ export default {
         },
         labels: {
             type: Array,
+            required: true,
+        },
+        width: {
+            required: true,
+        },
+        height: {
             required: true,
         }
     }
