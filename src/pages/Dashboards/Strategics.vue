@@ -9,19 +9,26 @@
 
         <div class="container-row-evenly mb-25">
             <Card class="gap-20 mb-25" title="Temps entre réservation et check-in moyen">
-                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1' ,data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
+                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
+                    :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
+                </Line>
             </Card>
             <Card class="gap-20 mb-25" title="Temps d'accueil moyen">
-                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
+                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
+                    :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
+                </Line>
             </Card>
             <Card class="gap-20 mb-25" title="Taux de remplissage moyen">
-                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
+                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
+                    :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
+                </Line>
             </Card>
         </div>
 
         <div class="container-unique mb-25">
             <Card class="height mb-25" title="Temps de remplissage">
-                <Line :height="'230px'" :width="'1300px'" :colors="['#00E396', '#F5222D']" class="blabla" :series="[{ data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }]"></Line>
+                <Line :height="'230px'" :width="'1300px'" :colors="['#00E396', '#F5222D']" class="blabla"
+                    :series="[{ data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }]"></Line>
             </Card>
         </div>
 
@@ -29,10 +36,14 @@
 
         <div class="container-row-around">
             <Card title="Temps entre réservation et check-in moyen" class="mb-25">
-                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
+                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
+                    :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
+                </Line>
             </Card>
             <Card title="Temps entre réservation et check-in moyen" class="mb-25">
-                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]"></Line>
+                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
+                    :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
+                </Line>
             </Card>
         </div>
 
@@ -99,7 +110,7 @@ export default {
     border-color: #00E396;
     border-inline-end-width: 1px;
     border-width: 2px;
-    box-shadow: 0 0 0 2px rgba(255,38,5,.06);
+    box-shadow: 0 0 0 2px rgba(255, 38, 5, .06);
     outline: 0;
 }
 
@@ -107,7 +118,7 @@ export default {
     border-color: #F5222D;
     border-width: 2px;
     border-inline-end-width: 1px;
-    box-shadow: 0 0 0 2px rgba(255,38,5,.06);
+    box-shadow: 0 0 0 2px rgba(255, 38, 5, .06);
     outline: 0;
 }
 
@@ -117,6 +128,8 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
+
+    /* mobile - tablet */
     .month-picker {
         display: flex;
         justify-content: center;
@@ -126,5 +139,4 @@ export default {
 
 p {
     margin-bottom: 0px;
-}
-</style>
+}</style>
