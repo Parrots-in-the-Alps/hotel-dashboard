@@ -12,6 +12,10 @@ export default {
     data() {
         return {
             chartOptions: {
+                responsive: [{
+                    breakpoint: 1000,
+                    options: {},
+                }],
                 stroke: {
                     curve: 'straight'
                 },
@@ -28,6 +32,7 @@ export default {
             },
         }
     },
+
     props: {
         series: {
             type: Array,
