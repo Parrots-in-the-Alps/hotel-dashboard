@@ -66,8 +66,6 @@ export default {
         onChange(date, dateString) {
             if (this.entryDate === null) {
                 this.entryDate = addDayToDate(dateString);
-                console.log(typeof this.entryDate);
-                console.log(this.entryDate);
             } else if (this.exitDate === null) {
                 this.exitDate = addDayToDate(dateString);
             }
@@ -76,11 +74,7 @@ export default {
         async checkApiCall() {
             if (this.exitDate !== null && this.entryDate !== null) {
                 try {
-                    console.log("checkAPICall()");
-                    console.log("entryDate = " + this.entryDate);
-                    console.log("exitDate = " + this.exitDate);
                     await this.$dataStore.getReservationsOnDates(this.entryDate, this.exitDate);
-                    console.dir(this.$dataStore.data);
                     //todo une fois qu'on a les data dans le store on utilise les fonctions de calculs 
                     //et de formatages de data dans le composant et on les envoie dans le template, 
                     //on ne renvoie pas les data dans le store pour écrasé les data pure et les réapeler 

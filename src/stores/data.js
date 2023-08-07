@@ -9,17 +9,17 @@ export const useDataStore = defineStore('data', {
     },
     actions: {
         async getReservationsOnDates(entryDate, exitDate) {
-            console.log("getReservationsOnDates()");
-            console.log("entryDate = " + entryDate);
-            console.log("exitDate = " + exitDate);
+            const headers = { 
+                "Content-Type": "application/json"
+            };
+            const data = {
+                entryDate : entryDate,
+                exitDate: exitDate
+            } 
             try {
-                const result = await apiRequester.get("/api/getReservationsOnDates", {
-                    body: {
-                        "entryDate": entryDate,
-                        "exitDate": exitDate,
-                    }
-                });
-                if (result.data.status == 200) {
+                const result = await apiRequester.get("/api/getReservationsOnDates", { params: data, headers });
+                console.dir(result);
+                if (result.status == 200) {
                     this.data = result.data;
                 }
             } catch (error) {
