@@ -9,25 +9,25 @@
 <div id="tactic_dashboard">
 
   <a-row>
-
+      
       <a-col :span="12">
-        <Card title="Réservations" class="card">
+        <a-card  title="reservation" size="small" style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B; height: 100%" headStyle="background-color: #243236; color: #A7A9BE" class="card">
           <a-row class="centered-row">
             <a-col  :span="12">
-              <RadialBar :labels="['occupation']"  :series="[71]"></RadialBar>
+              <RadialBar  :labels="['occupation']"  :series="[71]"></RadialBar>
             </a-col>
             <a-col :span="12">
               <div class="element">Temps d'acceuil moyen : 3 Min</div>
               <div class="element">Temps entre réservation et check-in: 3 Jours</div>
             </a-col>
           </a-row>
-        </Card>
+        </a-card>
       </a-col>
 
       <a-col :span="12">
-        <Card title="Temps moyen par reservation" class="card">
+        <a-card title="temps moyen" size="small" style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE" class="card">
           <Bar :labels="['standard', 'luxe', 'suite']" :series="[{ name: 'temps en jour' ,  data: [3, 5, 2] }]"></Bar>
-        </Card>
+        </a-card>
       </a-col>
 
   </a-row>
@@ -52,10 +52,10 @@
       <Card title="Utilisation des chambres" class="card">
         <a-row class="centered-row">
           <a-col :span="8">
-            <RadialBar :labels="['chambre standard']" :series="[26]"></RadialBar>
+            <RadialBar :labels="['chambre standard']" :series="[standardRoomsOccupancy]"></RadialBar>
           </a-col>
           <a-col :span="8">
-            <RadialBar :labels="['chambre de luxe']" :series="[50]"></RadialBar>
+            <RadialBar :labels="['chambre de luxe']" :series="[luxuryRoomsOccupancy]"></RadialBar>
           </a-col>
           <a-col :span="8">
             <RadialBar :labels="['suite']" :series="[33]"></RadialBar>
@@ -116,19 +116,46 @@
 <script>
 import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
+import apiRequester from "../../utils/apiRequester.js"
 
 export default {
   name: "Tactics",
   components: { Card },
   data() {
     return {
-      value1: null
-    }
+      value1: null,
+      standardRoomsOccupancy: 0,
+      luxuryRoomsOccupancy: 0,
+      reservationsData: [],
+      entryDate: '07/07/2023', 
+      exitDate: '09/07/2023',
+    };
+
+    },
+    mounted() {
+    this.fetchReservationsData();
   },
+  
   methods: {
-        onChange(date, dateString) {
-            //   console.log(date, dateString);
-        },
+        fetchReservationsData() {
+      
+          const headers = {
+        'Content-Type': 'application/json',
+      };
+          const data = {
+        entryDate: this.entryDate,
+        exitDate: this.exitDate,
+      };
+      apiRequester.get('/api/getReservationsOnDates', { params: data, headers })
+        .then(response => {
+          this.reservationsData = response.data;
+          console.log( this.reservationsData),
+          this.calculateOccupancyStats();
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
         onClick() {
             const tactic_dashboard = document.getElementById('tactic_dashboard');
             html2pdf(tactic_dashboard, {
@@ -137,8 +164,25 @@ export default {
                 filename: "toto_fait_des_pdf_avec_son_nez.pdf",
                 pagebreak: {mode: 'avoid-all'}
             });
-        }
+        },
+        calculateOccupancyStats() {
+      let standardCount = 0;
+      let luxuryCount = 0;
+ 
+      this.reservationsData.forEach(reservation => {
+      console.log(reservation);
+        if (reservation.room && reservation.room.roomType === '{"en":"standard","fr":"standard"}') {
+                standardCount++;
+              } else if (reservation.room && reservation.room.roomType === '{"en":"luxury","fr":"luxe"}') {
+                luxuryCount++;
+              }
+      });
+    
+      
+      this.standardRoomsOccupancy = standardCount;
+      this.luxuryRoomsOccupancy = luxuryCount;
     },
+  },
 }
 </script>
     

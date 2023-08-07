@@ -1,6 +1,6 @@
 <template>
     <div id="chart">
-      <apexchart type="bar" :options="chartOptions" :series="series"></apexchart>
+      <apexchart type="bar" :width="width" :height="height" :options="chartOptions" :series="series"></apexchart>
     </div>
   </template>
   
@@ -21,16 +21,21 @@
     },
   
     props: {
-      series: {
-        type: Array,
-        required: true,
-      },
-      labels: {
-        type: Array,
-        required: true,
-      },
-      
-    },
+        series: {
+            type: Array,
+            required: true,
+        },
+        labels: {
+            type: Array,
+            required: true,
+        },
+        width: {
+            required: true,
+        },
+        height: {
+            required: true,
+        }
+    }
   }
   </script>
   
