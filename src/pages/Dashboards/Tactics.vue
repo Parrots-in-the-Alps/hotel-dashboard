@@ -52,13 +52,13 @@
       <Card title="Utilisation des chambres" class="card">
         <a-row class="centered-row">
           <a-col :span="8">
-            <RadialBar :labels="['chambre standard']" :series="[standardRoomsOccupancy]"></RadialBar>
+            <RadialBar :labels="['chambre standard']" :series="[standardPercent]"></RadialBar>
           </a-col>
           <a-col :span="8">
-            <RadialBar :labels="['chambre de luxe']" :series="[luxuryRoomsOccupancy]"></RadialBar>
+            <RadialBar :labels="['chambre de luxe']" :series="[luxuryPercent]"></RadialBar>
           </a-col>
           <a-col :span="8">
-            <RadialBar :labels="['suite']" :series="[33]"></RadialBar>
+            <RadialBar :labels="['suite']" :series="[suitePercent]"></RadialBar>
           </a-col>
         </a-row>
       </Card>
@@ -127,6 +127,10 @@ export default {
       value1: null,
       standardRoomsOccupancy: 0,
       luxuryRoomsOccupancy: 0,
+      suiteRoomOccupancy: 0,
+      standardPercent: 0,
+      luxuryPercent: 0,
+      suitePercent: 0,
       reservationsData: [],
       entryDate: '07/07/2023', 
       exitDate: '09/07/2023',
@@ -169,6 +173,7 @@ export default {
         calculateOccupancyStats() {
       let standardCount = 0;
       let luxuryCount = 0;
+      let suiteCount = 0;
  
       this.reservationsData.forEach(reservation => {
       console.log(reservation);
@@ -176,14 +181,17 @@ export default {
                 standardCount++;
               } else if (reservation.room && reservation.room.roomType === '{"en":"luxury","fr":"luxe"}') {
                 luxuryCount++;
+              }else if (reservation.room && reservation.room.roomType === '{"en":"suite","fr":"suite"}') {
+                suiteCount++;
               }
       });
     
       
       this.standardRoomsOccupancy = standardCount;
       this.luxuryRoomsOccupancy = luxuryCount;
-        const dashboard = "tactic_dashboard";
-        dashboard2pdf(document.getElementById(dashboard), dashboard);
+      this.standardPercent = (standardCount / 25) * 100;
+      this.luxuryPercent = (luxuryCount / 5) * 100;
+      this.suitePercent = (suiteCount / 1) * 100;
     }
     },
   }
