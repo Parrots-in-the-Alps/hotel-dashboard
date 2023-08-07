@@ -3,7 +3,7 @@
     <a-row>
       <a-col :span="12">
         <Card title="Le pipi c'est délicieux">
-          <apexchart type="bar" :options="chartOptions" :series="series"></apexchart>
+          <Bar :labels="['standard', 'luxe', 'suite']" :series="[{ name: 'temps en jour' ,  data: [3, 5, 2] }]"></Bar>
         </Card>
       </a-col>
       <a-col :span="12">
@@ -349,18 +349,7 @@ export default {
   name: "HomePage",
   data: function () {
     return {
-      chartOptions: {
-        chart: {
-          id: 'ZOUNGOU'
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-        }
-      },
-      series: [{
-        name: 'series-1',
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
-      }],
+     
     }
   },
 }

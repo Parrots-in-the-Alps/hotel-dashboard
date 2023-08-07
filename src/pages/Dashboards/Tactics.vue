@@ -7,21 +7,32 @@
     </a-col>
   </a-row>
 <div id="tactic_dashboard">
+
   <a-row>
-    <a-col :span="24">
-      <Card title="Réservations" class="card">
-        <a-row class="centered-row">
-          <a-col :span="6">
-            <RadialBar :labels="['occupation']"  :series="[71]"></RadialBar>
-          </a-col>
-          <a-col :span="16">
-            <div class="element">Temps d'acceuil moyen : 3 Min</div>
-            <div class="element">Temps entre réservation et check-in: 3 Jours</div>
-          </a-col>
-        </a-row>
-      </Card>
-    </a-col>
+
+      <a-col :span="12">
+        <Card title="Réservations" class="card">
+          <a-row class="centered-row">
+            <a-col  :span="12">
+              <RadialBar :labels="['occupation']"  :series="[71]"></RadialBar>
+            </a-col>
+            <a-col :span="12">
+              <div class="element">Temps d'acceuil moyen : 3 Min</div>
+              <div class="element">Temps entre réservation et check-in: 3 Jours</div>
+            </a-col>
+          </a-row>
+        </Card>
+      </a-col>
+
+      <a-col :span="12">
+        <Card title="Temps moyen par reservation" class="card">
+          <Bar :labels="['standard', 'luxe', 'suite']" :series="[{ name: 'temps en jour' ,  data: [3, 5, 2] }]"></Bar>
+        </Card>
+      </a-col>
+
   </a-row>
+  
+
 
   <a-row>
     <a-col :span="24">
@@ -158,4 +169,7 @@ export default {
   margin-bottom: 50px;
 
 }
+
+
+
 </style>
