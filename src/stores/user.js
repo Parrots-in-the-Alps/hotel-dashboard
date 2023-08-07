@@ -24,11 +24,14 @@ export const useUserStore = defineStore('user', {
             router.push({ path: '/tactics' })
             console.log(this)
         },
-
         async logOut(){
             this.logged = false;
             router.push({ path: '/login' })
             console.log('toto mange de grands bols de bites')
+        },
+        async getReservationsOnDates() {
+            const data = (await apiRequester.get("/api/getReservationsOnDates")).data
+            console.log("\n\ngetReservationsOnDates: " + data.message);
         }
     }
 })
