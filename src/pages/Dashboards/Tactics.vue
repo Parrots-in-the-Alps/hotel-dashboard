@@ -153,7 +153,7 @@ export default {
       };
       apiRequester.get('/api/getReservationsOnDates', { params: data, headers })
         .then(response => {
-          this.reservationsData = response.data;
+          this.reservationsData = response.data.message;
           console.log( this.reservationsData),
           this.calculateOccupancyStats();
         })
