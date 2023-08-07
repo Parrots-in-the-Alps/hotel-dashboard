@@ -7,12 +7,13 @@ export const useUserStore = defineStore('user', {
         return {
             logged: true,
             user: {
-                name : 'Tutu'
+                name : 'Betsy Mougnagna'
             }
         }
     },
     actions: {
         async login(credentials) {
+            console.log('toto fait des galipètes avec ses reins')
             const token = (await apiRequester.post("/api/login", credentials)).data.token
 
             // Use the token for all future requests
@@ -29,9 +30,5 @@ export const useUserStore = defineStore('user', {
             router.push({ path: '/login' })
             console.log('toto mange de grands bols de bites')
         },
-        async getReservationsOnDates() {
-            const data = (await apiRequester.get("/api/getReservationsOnDates")).data
-            console.log("\n\ngetReservationsOnDates: " + data.message);
-        }
     }
 })
