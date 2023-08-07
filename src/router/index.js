@@ -1,11 +1,11 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import BaseLayout from '../pages/BaseLayout.vue'
 import Ops from '../pages/Dashboards/Ops.vue'
 import Tactics from '../pages/Dashboards/Tactics.vue'
 import Strategics from '../pages/Dashboards/Strategics.vue'
 import HomePage from '../pages/home/HomePage.vue'
 import { pinia } from '../main'
-import { useUserStore } from '../stores/user'
+import { useUserStore } from '../stores/user'
 
 
 export const router = createRouter({
@@ -45,7 +45,7 @@ export const router = createRouter({
                 }
             ]
         },
-        
+
     ]
 })
 
@@ -53,11 +53,10 @@ router.beforeEach((to) => {
     // ✅ This will work because the router starts its navigation after
     // the router is installed and pinia will be installed too
     const store = useUserStore()
-  console.log(store.logged)
-  if(to.name != 'login'){
-    if (!store.logged) return '/login'
-  }
-  })
+    if (to.name != 'login') {
+        if (!store.logged) return '/login'
+    }
+})
 
 
 

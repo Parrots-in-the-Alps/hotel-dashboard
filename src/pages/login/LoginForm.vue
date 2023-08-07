@@ -43,8 +43,8 @@ export default {
   data() {
     return {
       credentials: {
-        email: "",
-        password: ""
+        email: "theocolombel@gmail.com",
+        password: "toto"
       }
     };
   },
@@ -71,7 +71,6 @@ export default {
     async login() {
       // TODO do some validations first
       await this.$userStore.login(this.credentials);
-      await this.$userStore.getReservationsOnDates();
     }
   }
 };

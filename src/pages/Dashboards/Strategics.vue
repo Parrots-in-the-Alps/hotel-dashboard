@@ -52,28 +52,43 @@
 </template>
 
 <script>
-import html2pdf from "html2pdf.js";
+import { addDayToDate, dashboard2pdf } from "../../utils/vulcan_functions.js";
 
 export default {
     name: "Strategics",
     data() {
         return {
-
+            entryDate: null,
+            exitDate: null,
         }
     },
     methods: {
         onChange(date, dateString) {
-            //   console.log(date, dateString);
+            if (this.entryDate === null) {
+                this.entryDate = addDayToDate(dateString);
+            } else if (this.exitDate === null) {
+                this.exitDate = addDayToDate(dateString);
+            }
+            this.checkApiCall();
         },
-        onClick() {
-            const strategics_dashboard = document.getElementById('strategics_dashboard');
-            html2pdf(strategics_dashboard, {
-                jsPDF: { unit: "in", format: "b4", orientation: "l" },
-                filename: "toto_fait_des_pdf_avec_son_nez.pdf",
-                pagebreak: {mode: 'avoid-all'}
-            });
-        }
+        async checkApiCall() {
+            if (this.exitDate !== null && this.entryDate !== null) {
+                try {
+                    await this.$dataStore.getReservationsOnDates(this.entryDate, this.exitDate);
+                    //todo une fois qu'on a les data dans le store on utilise les fonctions de calculs 
+                    //et de formatages de data dans le composant et on les envoie dans le template, 
+                    //on ne renvoie pas les data dans le store pour écrasé les data pure et les réapeler 
+                    //pour les utiliser dans les templates directement
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        },
     },
+    onClick() {
+        const dashboard = "strategics_dashboard";
+        dashboard2pdf(document.getElementById(dashboard), dashboard);
+    }
 }
 
 </script>
@@ -150,4 +165,5 @@ export default {
 
 p {
     margin-bottom: 0px;
-}</style>
+}
+</style>

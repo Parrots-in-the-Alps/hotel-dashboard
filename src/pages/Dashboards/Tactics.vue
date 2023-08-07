@@ -117,6 +117,7 @@
 import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
 import apiRequester from "../../utils/apiRequester.js"
+import { dashboard2pdf } from "../../utils/vulcan_functions.js";
 
 export default {
   name: "Tactics",
@@ -181,9 +182,12 @@ export default {
       
       this.standardRoomsOccupancy = standardCount;
       this.luxuryRoomsOccupancy = luxuryCount;
+        const dashboard = "tactic_dashboard";
+        dashboard2pdf(document.getElementById(dashboard), dashboard);
+    }
     },
-  },
-}
+  }
+
 </script>
     
 <style scoped>
