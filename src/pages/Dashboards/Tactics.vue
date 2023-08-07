@@ -115,7 +115,7 @@
     
 <script>
 import { Card } from 'ant-design-vue';
-import html2pdf from "html2pdf.js";
+import { dashboard2pdf } from "../../utils/vulcan_functions.js";
 
 export default {
   name: "Tactics",
@@ -130,14 +130,9 @@ export default {
             //   console.log(date, dateString);
         },
         onClick() {
-            const tactic_dashboard = document.getElementById('tactic_dashboard');
-            html2pdf(tactic_dashboard, {
-                // margin: 1,
-                jsPDF: { unit: "in", format: "b4", orientation: "l" },
-                filename: "toto_fait_des_pdf_avec_son_nez.pdf",
-                pagebreak: {mode: 'avoid-all'}
-            });
-        }
+        const dashboard = "tactic_dashboard";
+        dashboard2pdf(document.getElementById(dashboard), dashboard);
+    }
     },
 }
 </script>
