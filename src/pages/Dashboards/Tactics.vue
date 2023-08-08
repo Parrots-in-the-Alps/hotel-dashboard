@@ -14,7 +14,7 @@
         <a-card  title="reservation" size="small" style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B; height: 100%" headStyle="background-color: #243236; color: #A7A9BE" class="card">
           <a-row class="centered-row">
             <a-col  :span="12">
-              <RadialBar  :labels="['occupation']"  :series="[71]"></RadialBar>
+              <RadialBar  :labels="['occupation']"  :series="[occupation]"></RadialBar>
             </a-col>
             <a-col :span="12">
               <div class="element">Temps d'acceuil moyen : 3 Min</div>
@@ -117,7 +117,8 @@
 import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
 import apiRequester from "../../utils/apiRequester.js"
-import { dashboard2pdf, calculateOccupancyStats } from "../../utils/vulcan_functions.js";
+import { dashboard2pdf } from "../../utils/vulcan_functions.js";
+import { calculateOccupancyStats } from "../../utils/tactics_functions";
 
 export default {
   name: "Tactics",
@@ -131,6 +132,7 @@ export default {
       standardPercent: 0,
       luxuryPercent: 0,
       suitePercent: 0,
+      occupation: 0,
       entryDate: '07/07/2023', 
       exitDate: '09/07/2023',
     };
@@ -154,7 +156,7 @@ export default {
                 try {
                     await this.$dataStore.getReservationsOnDates(this.entryDate, this.exitDate)
                     .then(response => {
-          this.calculateOccupancyStats();
+                    this.calculateOccupancyStats();
         });
                 } catch (error) {
                     console.error(error);
@@ -171,11 +173,13 @@ export default {
         standardPercent,
         luxuryPercent,
         suitePercent,
+        occupation,
       } = calculateOccupancyStats(this.$dataStore.data);
 
       this.standardPercent = standardPercent;
       this.luxuryPercent = luxuryPercent;
       this.suitePercent = suitePercent;
+      this.occupation = occupation;
     },
     },
   }
