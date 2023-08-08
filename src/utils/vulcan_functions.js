@@ -40,11 +40,11 @@ export const calculateOccupancyStats = function(reservationsData) {
 
     reservationsData.forEach(reservation => {
     console.log(reservation);
-      if (reservation.room && reservation.room.roomType === '{"en":"standard","fr":"standard"}') {
+      if (reservation.room && reservation.room.roomType === '{"en":"standard","fr":"standard"}' || reservation.room.roomType === 'standard') {
               standardCount++;
-            } else if (reservation.room && reservation.room.roomType === '{"en":"luxury","fr":"luxe"}') {
+            } else if (reservation.room && reservation.room.roomType === '{"en":"luxury","fr":"luxe"}' || reservation.room.roomType === 'luxury' || reservation.room.roomType === 'luxe') {
               luxuryCount++;
-            }else if (reservation.room && reservation.room.roomType === '{"en":"suite","fr":"suite"}') {
+            }else if (reservation.room && reservation.room.roomType === '{"en":"suite","fr":"suite"}' || reservation.room.roomType === 'suite') {
               suiteCount++;
             }
     });
