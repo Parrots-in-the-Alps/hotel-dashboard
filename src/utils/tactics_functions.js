@@ -26,3 +26,35 @@ export const calculateOccupancyStats = function(reservationsData) {
       occupation,
     };
   }
+
+
+  export function calculateAverageDurationByRoomType(reservationsData) {
+    const roomTypes = {};
+  
+    reservationsData.forEach(reservation => {
+      const roomType = reservation.room.roomType; 
+      const entryDate = new Date(reservation.entryDate);
+      const exitDate = new Date(reservation.exitDate);
+      const durationInDays = (exitDate - entryDate) / (1000 * 60 * 60 * 24);
+  
+      if (!roomTypes[roomType]) {
+        roomTypes[roomType] = {
+          totalDuration: durationInDays,
+          reservationCount: 1,
+        };
+      } else {
+        roomTypes[roomType].totalDuration += durationInDays;
+        roomTypes[roomType].reservationCount += 1;
+      }
+    });
+  
+    const averageDurations = {};
+    for (const type in roomTypes) {
+      if (roomTypes.hasOwnProperty(type)) {
+        const averageDuration = roomTypes[type].totalDuration / roomTypes[type].reservationCount;
+        averageDurations[type] = averageDuration;
+      }
+    }
+    console.log(averageDurations)
+    return averageDurations;
+  }

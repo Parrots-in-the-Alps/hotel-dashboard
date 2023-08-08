@@ -26,7 +26,7 @@
 
       <a-col :span="12">
         <a-card title="temps moyen" size="small" style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE" class="card">
-          <Bar :labels="['standard', 'luxe', 'suite']" :series="[{ name: 'temps en jour' ,  data: [3, 5, 2] }]"></Bar>
+          <Bar :labels="['standard', 'luxe', 'suite']" :series="[{ name: 'temps en jour' ,  data: [averageDurations.standard ? averageDurations.standard : null , averageDurations.luxury ? averageDurations.luxury : null, averageDurations.suite ? averageDurations.suite : null ] }]"></Bar>
         </a-card>
       </a-col>
 
@@ -118,7 +118,7 @@ import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
 import apiRequester from "../../utils/apiRequester.js"
 import { dashboard2pdf } from "../../utils/vulcan_functions.js";
-import { calculateOccupancyStats } from "../../utils/tactics_functions";
+import { calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
 
 export default {
   name: "Tactics",
@@ -133,6 +133,7 @@ export default {
       luxuryPercent: 0,
       suitePercent: 0,
       occupation: 0,
+      averageDurations: 0,
       entryDate: '07/07/2023', 
       exitDate: '09/07/2023',
     };
@@ -157,6 +158,8 @@ export default {
                     await this.$dataStore.getReservationsOnDates(this.entryDate, this.exitDate)
                     .then(response => {
                     this.calculateOccupancyStats();
+                    this.calculateAverageDurationByRoomType();
+                  
         });
                 } catch (error) {
                     console.error(error);
@@ -181,6 +184,12 @@ export default {
       this.suitePercent = suitePercent;
       this.occupation = occupation;
     },
+    calculateAverageDurationByRoomType(){
+      
+      const averageDurations = calculateAverageDurationByRoomType(this.$dataStore.data);
+      this.averageDurations = averageDurations;
+
+    }
     },
   }
 
