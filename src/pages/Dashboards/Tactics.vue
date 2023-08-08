@@ -3,7 +3,7 @@
   <a-row>
     <a-col :span="20"></a-col>
     <a-col :span="4">
-      <a-range-picker v-model:value="value1" class="card" format="MM-DD-YYYY" />
+      <a-range-picker v-model:value="value1" class="card" @change="onChange" locale="fr-FR"/>
     </a-col>
   </a-row>
 <div id="tactic_dashboard">
@@ -25,7 +25,7 @@
       </a-col>
 
       <a-col :span="12">
-        <a-card title="temps moyen" size="small" style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE" class="card">
+        <a-card title="temps moyen d'une réservation par type de chambre" size="small" style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE" class="card">
           <Bar :labels="['standard', 'luxe', 'suite']" :series="[{ name: 'temps en jour' ,  data: [averageDurations.standard ? averageDurations.standard : null , averageDurations.luxury ? averageDurations.luxury : null, averageDurations.suite ? averageDurations.suite : null ] }]"></Bar>
         </a-card>
       </a-col>
@@ -90,7 +90,7 @@
       <Card title="Nombre de réservations" class="card">
         <a-row class="centered-row">
           <a-col class="centered-content">
-            24
+            {{ this.$dataStore.data ? this.$dataStore.data.length : "..." }}
           </a-col>
         </a-row>
       </Card>
@@ -117,7 +117,7 @@
 import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
 import apiRequester from "../../utils/apiRequester.js"
-import { dashboard2pdf } from "../../utils/vulcan_functions.js";
+import { dashboard2pdf, addDayToDate } from "../../utils/vulcan_functions.js";
 import { calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
 
 export default {
@@ -134,8 +134,8 @@ export default {
       suitePercent: 0,
       occupation: 0,
       averageDurations: 0,
-      entryDate: '07/07/2023', 
-      exitDate: '09/07/2023',
+      entryDate: null, 
+      exitDate: null,
     };
 
     },
@@ -144,6 +144,16 @@ export default {
   },
   
   methods: {
+
+    onChange(date, dateString) {
+            if (this.entryDate === null) {
+                this.entryDate = addDayToDate(dateString);
+            } else if (this.exitDate === null) {
+                this.exitDate = addDayToDate(dateString);
+            }
+            console.log(this.value1)
+            console.log(this.value1[1].$H)
+        },
        async fetchReservationsData() {
       
           const headers = {
