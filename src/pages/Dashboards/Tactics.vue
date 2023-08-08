@@ -117,7 +117,7 @@
 import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
 import apiRequester from "../../utils/apiRequester.js"
-import { dashboard2pdf } from "../../utils/vulcan_functions.js";
+import { dashboard2pdf, calculateOccupancyStats } from "../../utils/vulcan_functions.js";
 
 export default {
   name: "Tactics",
@@ -131,7 +131,6 @@ export default {
       standardPercent: 0,
       luxuryPercent: 0,
       suitePercent: 0,
-      reservationsData: [],
       entryDate: '07/07/2023', 
       exitDate: '09/07/2023',
     };
@@ -142,7 +141,7 @@ export default {
   },
   
   methods: {
-        fetchReservationsData() {
+       async fetchReservationsData() {
       
           const headers = {
         'Content-Type': 'application/json',
@@ -151,48 +150,33 @@ export default {
         entryDate: this.entryDate,
         exitDate: this.exitDate,
       };
-      apiRequester.get('/api/getReservationsOnDates', { params: data, headers })
-        .then(response => {
-          this.reservationsData = response.data.message;
-          console.log( this.reservationsData),
+      if (this.exitDate !== null && this.entryDate !== null) {
+                try {
+                    await this.$dataStore.getReservationsOnDates(this.entryDate, this.exitDate)
+                    .then(response => {
           this.calculateOccupancyStats();
-        })
-        .catch(error => {
-          console.error(error);
         });
+                } catch (error) {
+                    console.error(error);
+                }
+            }
     },
         onClick() {
-            const tactic_dashboard = document.getElementById('tactic_dashboard');
-            html2pdf(tactic_dashboard, {
-                // margin: 1,
-                jsPDF: { unit: "in", format: "b4", orientation: "l" },
-                filename: "toto_fait_des_pdf_avec_son_nez.pdf",
-                pagebreak: {mode: 'avoid-all'}
-            });
+             const dashboard = "tactic_dashboard";
+        dashboard2pdf(document.getElementById(dashboard), dashboard);
         },
+
         calculateOccupancyStats() {
-      let standardCount = 0;
-      let luxuryCount = 0;
-      let suiteCount = 0;
- 
-      this.reservationsData.forEach(reservation => {
-      console.log(reservation);
-        if (reservation.room && reservation.room.roomType === '{"en":"standard","fr":"standard"}') {
-                standardCount++;
-              } else if (reservation.room && reservation.room.roomType === '{"en":"luxury","fr":"luxe"}') {
-                luxuryCount++;
-              }else if (reservation.room && reservation.room.roomType === '{"en":"suite","fr":"suite"}') {
-                suiteCount++;
-              }
-      });
-    
-      
-      this.standardRoomsOccupancy = standardCount;
-      this.luxuryRoomsOccupancy = luxuryCount;
-      this.standardPercent = (standardCount / 25) * 100;
-      this.luxuryPercent = (luxuryCount / 5) * 100;
-      this.suitePercent = (suiteCount / 1) * 100;
-    }
+      const {
+        standardPercent,
+        luxuryPercent,
+        suitePercent,
+      } = calculateOccupancyStats(this.$dataStore.data);
+
+      this.standardPercent = standardPercent;
+      this.luxuryPercent = luxuryPercent;
+      this.suitePercent = suitePercent;
+    },
     },
   }
 

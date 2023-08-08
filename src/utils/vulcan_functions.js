@@ -29,3 +29,40 @@ export const dashboard2pdf = function(id_html, filename) {
 } 
 
 // html2pdf END
+
+
+// stats START
+
+export const calculateOccupancyStats = function(reservationsData) {
+    let standardCount = 0;
+    let luxuryCount = 0;
+    let suiteCount = 0;
+
+    reservationsData.forEach(reservation => {
+    console.log(reservation);
+      if (reservation.room && reservation.room.roomType === '{"en":"standard","fr":"standard"}') {
+              standardCount++;
+            } else if (reservation.room && reservation.room.roomType === '{"en":"luxury","fr":"luxe"}') {
+              luxuryCount++;
+            }else if (reservation.room && reservation.room.roomType === '{"en":"suite","fr":"suite"}') {
+              suiteCount++;
+            }
+    });
+  
+    
+    const standardRoomsOccupancy = standardCount;
+    const luxuryRoomsOccupancy = luxuryCount;
+    const suiteRoomsOccupancy = suiteCount;
+    const standardPercent = (standardCount / 25) * 100;
+    const luxuryPercent = (luxuryCount / 5) * 100;
+    const suitePercent = (suiteCount / 1) * 100;
+  
+    return {
+      standardPercent,
+      luxuryPercent,
+      suitePercent,
+    };
+  }
+
+
+//stats END

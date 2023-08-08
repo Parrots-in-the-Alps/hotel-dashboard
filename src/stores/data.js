@@ -20,7 +20,7 @@ export const useDataStore = defineStore('data', {
                 const result = await apiRequester.get("/api/getReservationsOnDates", { params: data, headers });
                 console.dir(result);
                 if (result.status == 200) {
-                    this.data = result.data;
+                    this.data = result.data.message;
                 }
             } catch (error) {
                 if (error.response.status != 200) {
