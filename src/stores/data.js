@@ -4,7 +4,8 @@ import apiRequester from "../utils/apiRequester.js"
 export const useDataStore = defineStore('data', {
     state() {
         return {
-            data: null
+            data: null,
+            error_message: null
         }
     },
     actions: {
@@ -24,7 +25,7 @@ export const useDataStore = defineStore('data', {
                 }
             } catch (error) {
                 if (error.response.status != 200) {
-                    console.error("getReservationsOnDates : " + error.response.data.message);
+                    this.error_message = error.response.data.message;
                 }
             }
         }

@@ -1,6 +1,6 @@
 <template>
   <div id="chart">
-    <apexchart type="line" :height="height" :width="width" :options="chartOptions" :series="series"></apexchart>
+    <apexchart type="line" :height="height" :width="width" :options="chartOptions" :series="series"></apexchart> <!-- todo ajouter l'echelle ? en jours pour les series -->
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
           },
         },
         xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'], //todo à passer en props
         }
       },
     }

@@ -8,10 +8,14 @@
             <button type="button" class="gap-20" @click="onClick">Download to PDF</button>
         </div>
 
+        <div class="container-unique mb-25" v-if="error_message != null">
+            <p>{{ error_message }}</p>
+        </div>
+
         <div class="container-row-evenly mb-25">
-            <Card class="gap-20 mb-25" title="Temps entre réservation et check-in moyen">
+            <Card class="gap-20 mb-25" title="Temps entre réservation et check-in moyen" v-if="data_calculate != null">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
-                    :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
+                    :series="[{ name: 'durée (en jours)', data: data_calculate }]">
                 </Line>
             </Card>
             <Card class="gap-20 mb-25" title="Temps d'accueil moyen">
@@ -52,7 +56,8 @@
 </template>
 
 <script>
-import { addDayToDate, dashboard2pdf } from "../../utils/vulcan_functions.js";
+import {dashboard2pdf } from "../../utils/vulcan_functions.js";
+import { addDayToDate, averageTimeBetweenReservationAndCheckIn } from "../../utils/strategics_dashboard.js"
 
 export default {
     name: "Strategics",
@@ -60,6 +65,8 @@ export default {
         return {
             entryDate: null,
             exitDate: null,
+            error_message: null,
+            data_calculate: null
         }
     },
     methods: {
@@ -75,6 +82,9 @@ export default {
             if (this.exitDate !== null && this.entryDate !== null) {
                 try {
                     await this.$dataStore.getReservationsOnDates(this.entryDate, this.exitDate);
+                    const error = this.$dataStore.error_message;
+                    this.error_message = error != null ? error : null;
+                    this.calculator();
                     //todo une fois qu'on a les data dans le store on utilise les fonctions de calculs 
                     //et de formatages de data dans le composant et on les envoie dans le template, 
                     //on ne renvoie pas les data dans le store pour écrasé les data pure et les réapeler 
@@ -84,11 +94,14 @@ export default {
                 }
             }
         },
+        calculator() {
+            this.data_calculate = averageTimeBetweenReservationAndCheckIn(this.$dataStore.data);
+        }
     },
     onClick() {
         const dashboard = "strategics_dashboard";
         dashboard2pdf(document.getElementById(dashboard), dashboard);
-    }
+    },
 }
 
 </script>
