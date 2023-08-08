@@ -1,3 +1,10 @@
+import moment from "moment";
+
+
+export const translateDate = function(date){
+    date =  JSON.parse(JSON.stringify(date));
+return moment(date).format('YYYY-MM-DD');
+}
 export const calculateOccupancyStats = function(reservationsData) {
     let standardCount = 0;
     let luxuryCount = 0;
@@ -51,7 +58,7 @@ export const calculateOccupancyStats = function(reservationsData) {
     const averageDurations = {};
     for (const type in roomTypes) {
       if (roomTypes.hasOwnProperty(type)) {
-        const averageDuration = roomTypes[type].totalDuration / roomTypes[type].reservationCount;
+        const averageDuration = Math.round(roomTypes[type].totalDuration / roomTypes[type].reservationCount);
         averageDurations[type] = averageDuration;
       }
     }

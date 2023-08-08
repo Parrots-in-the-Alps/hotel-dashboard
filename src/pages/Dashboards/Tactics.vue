@@ -3,7 +3,7 @@
   <a-row>
     <a-col :span="20"></a-col>
     <a-col :span="4">
-      <a-range-picker v-model:value="value1" class="card" @change="onChange" locale="fr-FR"/>
+      <a-range-picker  v-model:value="value1" class="card" @change="onChange"/>
     </a-col>
   </a-row>
 <div id="tactic_dashboard">
@@ -117,8 +117,9 @@
 import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
 import apiRequester from "../../utils/apiRequester.js"
-import { dashboard2pdf, addDayToDate } from "../../utils/vulcan_functions.js";
-import { calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
+import { dashboard2pdf } from "../../utils/vulcan_functions.js";
+import { translateDate, calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
+import moment from "moment";
 
 export default {
   name: "Tactics",
@@ -134,8 +135,8 @@ export default {
       suitePercent: 0,
       occupation: 0,
       averageDurations: 0,
-      entryDate: null, 
-      exitDate: null,
+      entryDate: moment().format('YYYY-MM-DD'), 
+      exitDate: moment().add(1, 'days').format('YYYY-MM-DD'),
     };
 
     },
@@ -146,13 +147,11 @@ export default {
   methods: {
 
     onChange(date, dateString) {
-            if (this.entryDate === null) {
-                this.entryDate = addDayToDate(dateString);
-            } else if (this.exitDate === null) {
-                this.exitDate = addDayToDate(dateString);
-            }
-            console.log(this.value1)
-            console.log(this.value1[1].$H)
+        
+        
+        this.entryDate = translateDate(this.value1[0]);
+        this.exitDate = translateDate(this.value1[1]);
+        this.fetchReservationsData();
         },
        async fetchReservationsData() {
       
