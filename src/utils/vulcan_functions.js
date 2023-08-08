@@ -49,10 +49,6 @@ export const calculateOccupancyStats = function(reservationsData) {
             }
     });
   
-    
-    const standardRoomsOccupancy = standardCount;
-    const luxuryRoomsOccupancy = luxuryCount;
-    const suiteRoomsOccupancy = suiteCount;
     const standardPercent = (standardCount / 25) * 100;
     const luxuryPercent = (luxuryCount / 5) * 100;
     const suitePercent = (suiteCount / 1) * 100;
