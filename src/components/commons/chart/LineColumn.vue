@@ -1,6 +1,6 @@
 <template>
     <div id="chart">
-        <apexchart type="line" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="line" :height="height" :width="width" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
 
@@ -15,6 +15,12 @@ export default {
         labels: {
             type: Array,
             required: true
+        },
+        width: {
+            required: true,
+        },
+        height: {
+            required: true,
         }
     },
     data() {

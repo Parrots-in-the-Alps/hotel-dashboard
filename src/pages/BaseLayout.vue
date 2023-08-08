@@ -18,9 +18,6 @@
   .bodybodymassage{
     height: auto;
     background-color: #607D8B;
-    padding-top: 1.5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding: 1.5rem;
   }
   </style>

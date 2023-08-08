@@ -1,6 +1,6 @@
 <template>
   <div id="chart">
-    <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
+    <apexchart type="donut" :height="height" :width="width" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
       chartOptions: {
         labels: this.labels,
         //si on indique pas ici qu'il doit utiliser les labels qu'on lui passe en paramètre de composant, comme il ne sont pas indiqués dans le apexchart du template (ce qui est le cas dans la doc) alors il n'affichera pas les labels
-        
+
         plotOptions: {
           pie: {
             donut: {
@@ -39,7 +39,13 @@ export default {
       type: Array,
       required: true,
     },
-    
+    width: {
+      required: true,
+    },
+    height: {
+      required: true,
+    }
+
   },
 }
 </script>
