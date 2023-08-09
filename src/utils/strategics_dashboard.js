@@ -7,7 +7,7 @@ export const addDayToDate = function(dateString) {
 export const averageTimeBetweenReservationAndCheckIn = function(data) {
     data = JSON.parse(JSON.stringify(data));
     const result = [];
-
+    
     data.forEach(reservation => {
         if(reservation.checked_in != null) {
             const date_format = "YYYY/mm/DD";
@@ -15,6 +15,7 @@ export const averageTimeBetweenReservationAndCheckIn = function(data) {
             const checked_in = moment(reservation.checked_in, date_format);
             result.push(created_at.diff(checked_in, "days"));
         }
-    }); 
+    });
+
     return result;
 }

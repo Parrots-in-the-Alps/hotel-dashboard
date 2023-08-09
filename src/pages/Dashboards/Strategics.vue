@@ -13,9 +13,9 @@
         </div>
 
         <div class="container-row-evenly mb-25">
-            <Card class="gap-20 mb-25" title="Temps entre réservation et check-in moyen" v-if="data_calculate != null">
-                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
-                    :series="[{ name: 'durée (en jours)', data: data_calculate }]">
+            <Card class="gap-20 mb-25" title="Temps entre réservation et check-in moyen" v-if="reservations_by_months.precedently_month != null && reservations_by_months.currently_month != null">
+                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :title_bottom="'reservations'" :title_left="'jours - réservation au check-in'"
+                    :series="[ { name: 'precedently month', data: reservations_by_months.precedently_month }, { name: 'currently month', data: reservations_by_months.currently_month }]">
                 </Line>
             </Card>
             <Card class="gap-20 mb-25" title="Temps d'accueil moyen">
@@ -63,39 +63,39 @@ export default {
     name: "Strategics",
     data() {
         return {
-            entryDate: null,
-            exitDate: null,
+            precedently_month: null,
+            currently_month: null,
             error_message: null,
-            data_calculate: null
+            reservations_by_months: {
+                precedently_month: null,
+                currently_month: null
+            }
         }
     },
     methods: {
         onChange(date, dateString) {
-            if (this.entryDate === null) {
-                this.entryDate = addDayToDate(dateString);
-            } else if (this.exitDate === null) {
-                this.exitDate = addDayToDate(dateString);
+            if (this.precedently_month === null) {
+                this.precedently_month = addDayToDate(dateString);
+            } else if (this.currently_month === null) {
+                this.currently_month = addDayToDate(dateString);
             }
             this.checkApiCall();
         },
         async checkApiCall() {
-            if (this.exitDate !== null && this.entryDate !== null) {
+            if (this.currently_month !== null && this.precedently_month !== null) {
                 try {
-                    await this.$dataStore.getReservationsOnDates(this.entryDate, this.exitDate);
+                    await this.$dataStore.getReservationsByMonths(this.precedently_month, this.currently_month);
                     const error = this.$dataStore.error_message;
                     this.error_message = error != null ? error : null;
-                    this.calculator();
-                    //todo une fois qu'on a les data dans le store on utilise les fonctions de calculs 
-                    //et de formatages de data dans le composant et on les envoie dans le template, 
-                    //on ne renvoie pas les data dans le store pour écrasé les data pure et les réapeler 
-                    //pour les utiliser dans les templates directement
+                    if(this.error_message == null) this.calculator();
                 } catch (error) {
                     console.error(error);
                 }
             }
         },
         calculator() {
-            this.data_calculate = averageTimeBetweenReservationAndCheckIn(this.$dataStore.data);
+            this.reservations_by_months.precedently_month = averageTimeBetweenReservationAndCheckIn(this.$dataStore.reservations_by_months.precedently_month);
+            this.reservations_by_months.currently_month = averageTimeBetweenReservationAndCheckIn(this.$dataStore.reservations_by_months.currently_month);
         }
     },
     onClick() {
