@@ -33,3 +33,8 @@ export const roomOccupancyRateInTheFuture = function(data) {
     const result = Math.round((reservations / 31) * 100);
     return result;
 }
+
+export const fillingRate = function() {
+    const result = Math.round((750 / 961) * 100); // 750 chambres ~environ alloués /mois et 961 = 31 chambres * 31 jours 
+    return result;
+}

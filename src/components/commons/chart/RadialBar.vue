@@ -1,11 +1,6 @@
 <template>
   <div>
-
-
     <apexchart type="radialBar" :options="plotOptions" :series="series"></apexchart>
-
-
-
   </div>
 </template>
 
@@ -22,7 +17,11 @@ export default {
     labels: {
       type: Array,
       required: true,
-    }
+    },
+    colors: {
+      type: String,
+      required: false,
+    },
   },
   data: function () {
     return {
@@ -35,6 +34,7 @@ export default {
           inverseOrder: true,
 
         },
+        colors: this.colors,
         labels: this.labels,
       },
     }

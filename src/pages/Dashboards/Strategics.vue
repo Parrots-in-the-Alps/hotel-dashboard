@@ -13,32 +13,33 @@
         </div>
 
         <div class="container-row-evenly mb-25">
-            <Card class="gap-20 mb-25" title="Temps entre réservation et check-in moyen" v-if="reservations_by_months.averageTimeBetweenReservationAndCheckIn.precedently_month != null && reservations_by_months.averageTimeBetweenReservationAndCheckIn.currently_month != null">
-                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :title_bottom="'reservations'" :title_left="'jours - réservation au check-in'"
-                    :series="[ { name: 'precedently month', data: reservations_by_months.averageTimeBetweenReservationAndCheckIn.precedently_month }, { name: 'currently month', data: reservations_by_months.averageTimeBetweenReservationAndCheckIn.currently_month }]">
+            <Card class="gap-20 mb-25" title="Temps entre réservation et check-in moyen"
+                v-if="reservations_by_months.averageTimeBetweenReservationAndCheckIn.precedently_month != null && reservations_by_months.averageTimeBetweenReservationAndCheckIn.currently_month != null">
+                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :title_bottom="'reservations'"
+                    :title_left="'jours - réservation au check-in'"
+                    :series="[{ name: 'precedently month', data: reservations_by_months.averageTimeBetweenReservationAndCheckIn.precedently_month }, { name: 'currently month', data: reservations_by_months.averageTimeBetweenReservationAndCheckIn.currently_month }]">
                 </Line>
             </Card>
-            <Card class="gap-20 mb-25" title="Temps d'accueil moyen">
+            <!-- <Card class="gap-20 mb-25" title="Temps d'accueil moyen">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
-                :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
-            </Line>
-        </Card>
-        <Card class="gap-20 mb-25" title="Taux de remplissage moyen"  v-if="reservations_by_months.roomOccupancyRateInTheFuture.precedently_month != null && reservations_by_months.roomOccupancyRateInTheFuture.currently_month != null">
-            <RadialBar :labels="['precedently month', 'currently month']" :series="[reservations_by_months.roomOccupancyRateInTheFuture.precedently_month < 1 ? 0 : reservations_by_months.roomOccupancyRateInTheFuture.precedently_month, reservations_by_months.roomOccupancyRateInTheFuture.currently_month < 1 ? 0 : reservations_by_months.roomOccupancyRateInTheFuture.currently_month]"></RadialBar> ajouter les couleurs aux props du composant
-        </Card>
-        </div>
-
-        <div class="container-unique mb-25">
-            <Card class="height mb-25" title="Temps de remplissage">
-                <Line :height="'230px'" :width="'1300px'" :colors="['#00E396', '#F5222D']" class="blabla"
-                    :series="[{ data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }]"></Line>
+                    :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
+                </Line>
+            </Card> -->
+            <Card class="gap-20 mb-25" title="Taux de remplissage moyen"
+                v-if="reservations_by_months.roomOccupancyRateInTheFuture.precedently_month != null && reservations_by_months.roomOccupancyRateInTheFuture.currently_month != null">
+                <RadialBar :labels="['precedently month', 'currently month']" :colors="['#00E396', '#F5222D']"
+                    :series="[reservations_by_months.roomOccupancyRateInTheFuture.precedently_month < 1 ? 0 : reservations_by_months.roomOccupancyRateInTheFuture.precedently_month, reservations_by_months.roomOccupancyRateInTheFuture.currently_month < 1 ? 0 : reservations_by_months.roomOccupancyRateInTheFuture.currently_month]">
+                </RadialBar>
             </Card>
         </div>
-
-        <!-- TODO: faire des media query pour les width des graphs en longeurs -->
 
         <div class="container-row-around">
-            <Card title="Temps entre réservation et check-in moyen" class="mb-25">
+            <Card class="gap-20 mb-25" title="Taux de remplissage"
+                v-if="reservations_by_months.fillingRate != null && reservations_by_months.fillingRate != null">
+                <RadialBar :labels="['']" :colors="['#F5222D']"
+                    :series="[reservations_by_months.fillingRate < 1 ? 0 : reservations_by_months.fillingRate]"></RadialBar>
+            </Card>
+            <!-- <Card title="Temps entre réservation et check-in moyen" class="mb-25">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
                     :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
                 </Line>
@@ -47,15 +48,15 @@
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
                     :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
                 </Line>
-            </Card>
+            </Card> -->
         </div>
 
     </div>
 </template>
 
 <script>
-import {dashboard2pdf } from "../../utils/vulcan_functions.js";
-import { addDayToDate, averageTimeBetweenReservationAndCheckIn, roomOccupancyRateInTheFuture } from "../../utils/strategics_dashboard.js"
+import { dashboard2pdf } from "../../utils/vulcan_functions.js";
+import { addDayToDate, averageTimeBetweenReservationAndCheckIn, roomOccupancyRateInTheFuture, fillingRate } from "../../utils/strategics_dashboard.js"
 
 export default {
     name: "Strategics",
@@ -73,6 +74,7 @@ export default {
                     precedently_month: null,
                     currently_month: null
                 },
+                fillingRate: null,
             }
         }
     },
@@ -91,7 +93,7 @@ export default {
                     await this.$dataStore.getReservationsByMonths(this.precedently_month, this.currently_month);
                     const error = this.$dataStore.error_message;
                     this.error_message = error != null ? error : null;
-                    if(this.error_message == null) this.calculator();
+                    if (this.error_message == null) this.calculator();
                 } catch (error) {
                     console.error(error);
                 }
@@ -102,6 +104,7 @@ export default {
             this.reservations_by_months.averageTimeBetweenReservationAndCheckIn.currently_month = averageTimeBetweenReservationAndCheckIn(this.$dataStore.reservations_by_months.currently_month);
             this.reservations_by_months.roomOccupancyRateInTheFuture.precedently_month = roomOccupancyRateInTheFuture(this.$dataStore.reservations_by_months.precedently_month);
             this.reservations_by_months.roomOccupancyRateInTheFuture.currently_month = roomOccupancyRateInTheFuture(this.$dataStore.reservations_by_months.currently_month);
+            this.reservations_by_months.fillingRate = fillingRate();
         }
     },
     onClick() {
@@ -184,5 +187,4 @@ export default {
 
 p {
     margin-bottom: 0px;
-}
-</style>
+}</style>
