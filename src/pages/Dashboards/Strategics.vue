@@ -1,5 +1,8 @@
 <template>
-    <div class="container-column" id="strategics_dashboard">
+    <div v-if="isLoading">
+        <Loading></Loading>
+    </div>
+    <div class="container-column" id="strategics_dashboard" v-else>
 
         <div class="month-picker mb-25">
             <a-month-picker class="gap-20 error" placeholder="Mois précédent" @change="onChange" />
@@ -60,6 +63,7 @@ export default {
     name: "Strategics",
     data() {
         return {
+            isLoading: false,
             precedently_month: null,
             currently_month: null,
             error_message: null,
@@ -95,11 +99,13 @@ export default {
         },
         async checkApiCall() {
             if (this.currently_month !== null && this.precedently_month !== null) {
+                this.isLoading = true;
                 try {
                     await this.$dataStore.getReservationsByMonths(this.precedently_month, this.currently_month);
                     const error = this.$dataStore.error_message;
                     this.error_message = error != null ? error : null;
                     if (this.error_message == null) this.calculator();
+                    this.isLoading = false;
                 } catch (error) {
                     console.error(error);
                 }
