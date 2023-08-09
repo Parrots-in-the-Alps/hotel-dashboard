@@ -17,7 +17,6 @@
   <style scoped>
   .bodybodymassage {
     height: auto;
-    background-color: #607D8B;
     padding: 1.5rem;
   }
   </style>
