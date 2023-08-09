@@ -7,7 +7,7 @@ export const addDayToDate = function(dateString) {
 export const averageTimeBetweenReservationAndCheckIn = function(data) {
     data = JSON.parse(JSON.stringify(data));
     const result = [];
-    
+
     data.forEach(reservation => {
         if(reservation.checked_in != null) {
             const date_format = "YYYY/mm/DD";
@@ -17,5 +17,22 @@ export const averageTimeBetweenReservationAndCheckIn = function(data) {
         }
     });
 
+    return result;
+}
+
+export const roomOccupancyRateInTheFuture = function(data) {
+    data = JSON.parse(JSON.stringify(data));
+    let reservations = 0;
+
+    data.forEach(reservation => {
+        if(reservation.checked_in == null) {
+            reservations++;
+        }
+    });
+    
+    console.log("roomOccupancyRateInTheFuture");
+    console.log("reservations: " + reservations);
+    const result = Math.round((reservations / 31) * 100);
+    console.log(result);
     return result;
 }
