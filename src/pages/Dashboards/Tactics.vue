@@ -7,7 +7,8 @@
     </a-col>
   </a-row>
 <div id="tactic_dashboard">
-
+  <div v-if="isLoading">Chargement en cours...</div>
+  <div v-else>
   <a-row :gutter="[16,16]">
       
       <a-col :span="12">
@@ -31,6 +32,7 @@
       </a-col>
 
   </a-row>
+
   
 
 
@@ -70,7 +72,7 @@
       <Card title="Panier Moyen" class="card">
         <a-row class="centered-row">
           <a-col class="centered-content">
-            {{ cartPrice }} €
+            {{ averageCartPrice }} €
           </a-col>
         </a-row>
       </Card>
@@ -110,6 +112,7 @@
       </Card>
     </a-col>
   </a-row>
+</div>
 
 
  
@@ -137,7 +140,8 @@ export default {
       luxuryPercent: 0,
       suitePercent: 0,
       occupation: 0,
-      cartPrice: 0,
+      isLoading: false,
+      averageCartPrice: 0,
       totalCartPrice: 0,
       averageDurations: 0,
       entryDate: moment().format('YYYY-MM-DD'), 
@@ -159,6 +163,7 @@ export default {
         this.fetchReservationsData();
         },
        async fetchReservationsData() {
+        this.isLoading = true;
       
           const headers = {
         'Content-Type': 'application/json',
@@ -174,9 +179,12 @@ export default {
                     this.calculateOccupancyStats();
                     this.calculateAverageDurationByRoomType();   
                     this.moneyStats(); 
-        });
+        }).finally(() => {
+              this.isLoading = false; 
+            });
                 } catch (error) {
                     console.error(error);
+                    this.isLoading = false;
                 }
             }
     },
@@ -206,10 +214,10 @@ export default {
     },
     moneyStats() {
       const {
-        cartPrice,
+        averageCartPrice,
         totalCartPrice
       } =  moneyStats(this.$dataStore.data);
-      this.cartPrice = cartPrice;
+      this.averageCartPrice = averageCartPrice;
       this.totalCartPrice = totalCartPrice;
     },
     },

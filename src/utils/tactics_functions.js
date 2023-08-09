@@ -70,14 +70,37 @@ export const calculateOccupancyStats = function(reservationsData) {
     let totalCartPrice = 0;
 
     reservationsData.forEach(reservation => {
-      totalCartPrice += reservation.room.roomPrice * reservation.duration;
+      let reservationPrice = parseFloat(reservation.room.roomPrice) * reservation.duration;
+  
+      reservation.services.forEach(service => {
+        if (service.billingType === 'daily') {
+          reservationPrice += parseFloat(service.servicePrice) * reservation.duration;
+        } else if (service.billingType === 'weekly') {
+          const daysInAWeek = 7;
+          const numberOfWeeks = Math.floor(reservation.duration / daysInAWeek);
+          reservationPrice += parseFloat(service.servicePrice) * (1 + numberOfWeeks);
+        } else if (service.billingType === 'unitary') {
+          reservationPrice += parseFloat(service.servicePrice);
+        }
+      });
+  
+      totalCartPrice += reservationPrice;
     });
-    const cartPrice = Math.round(totalCartPrice / reservationsData.length);
+
+    
+    const averageCartPrice = Math.round(totalCartPrice / reservationsData.length);
     return {
-      cartPrice,
+      averageCartPrice,
       totalCartPrice
     }
   }
+
+
+export function timeStats(reservationsData){
+  reservationsData.forEach(reservation=>{
+    
+  })
+}
 
 
  
