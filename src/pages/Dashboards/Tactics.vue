@@ -7,7 +7,7 @@
     </a-col>
   </a-row>
 <div id="tactic_dashboard">
-  <div v-if="isLoading">Chargement en cours...</div>
+  <div class="centered-row" v-if="isLoading"> <Loading></Loading></div>
   <div v-else>
   <a-row :gutter="[16,16]">
       
