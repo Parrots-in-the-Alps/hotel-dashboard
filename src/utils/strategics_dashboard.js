@@ -38,3 +38,8 @@ export const fillingRate = function() {
     const result = Math.round((750 / 961) * 100); // 750 chambres ~environ alloués /mois et 961 = 31 chambres * 31 jours 
     return result;
 }
+
+export const numberOfReservations = function(data) {
+    data = JSON.parse(JSON.stringify(data));
+    return data.length;
+}

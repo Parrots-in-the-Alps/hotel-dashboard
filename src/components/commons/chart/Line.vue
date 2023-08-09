@@ -29,6 +29,7 @@ export default {
           },
         },
         xaxis: {
+          categories: this.categories,
           title: {
             text: this.title_bottom,
           }
@@ -45,6 +46,10 @@ export default {
     series: {
       type: Array,
       required: true,
+    },
+    categories: {
+      type: Array,
+      required: false,
     },
     title_bottom: {
       type: String,
