@@ -62,7 +62,7 @@ export default {
 
   .loadingspinner div {
     display: inline-block;
-    background: darkorange;
+    background: #FF9800;
     /*background: var(--text-color);*/
     /*box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);*/
     border: none;
