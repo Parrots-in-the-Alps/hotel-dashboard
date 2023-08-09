@@ -30,9 +30,6 @@ export const roomOccupancyRateInTheFuture = function(data) {
         }
     });
     
-    console.log("roomOccupancyRateInTheFuture");
-    console.log("reservations: " + reservations);
     const result = Math.round((reservations / 31) * 100);
-    console.log(result);
     return result;
 }
