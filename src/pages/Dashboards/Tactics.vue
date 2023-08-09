@@ -18,8 +18,8 @@
               <RadialBar  :labels="['occupation']"  :series="[occupation]"></RadialBar>
             </a-col>
             <a-col :span="12">
-              <div class="element">Temps d'acceuil moyen : 3 Min</div>
-              <div class="element">Temps entre réservation et check-in: 3 Jours</div>
+              <div class="element">Temps d'acceuil moyen : {{acceuilDuration}}</div>
+              <div class="element">Temps entre réservation et check-in: {{checkInDuration}}</div>
             </a-col>
           </a-row>
         </a-card>
@@ -124,7 +124,7 @@ import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
 import apiRequester from "../../utils/apiRequester.js"
 import { moneyStats, dashboard2pdf } from "../../utils/vulcan_functions.js";
-import { translateDate, calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
+import { timeAcceuil, timeBetweenResaCheckIn, translateDate, calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
 import moment from "moment";
 
 export default {
@@ -144,6 +144,8 @@ export default {
       averageCartPrice: 0,
       totalCartPrice: 0,
       averageDurations: 0,
+      checkInDuration: 0,
+      acceuilDuration: 0,
       entryDate: moment().format('YYYY-MM-DD'), 
       exitDate: moment().add(1, 'days').format('YYYY-MM-DD'),
     };
@@ -178,7 +180,9 @@ export default {
                     .then(response => {
                     this.calculateOccupancyStats();
                     this.calculateAverageDurationByRoomType();   
-                    this.moneyStats(); 
+                    this.moneyStats();
+                    this.timeBetweenResaCheckIn(); 
+                    this.timeAcceuil();
         }).finally(() => {
               this.isLoading = false; 
             });
@@ -220,6 +224,14 @@ export default {
       this.averageCartPrice = averageCartPrice;
       this.totalCartPrice = totalCartPrice;
     },
+    timeBetweenResaCheckIn(){
+      const checkInDuration = timeBetweenResaCheckIn(this.$dataStore.data);
+      this.checkInDuration = checkInDuration
+    },
+    timeAcceuil(){
+      const acceuilDuration = timeAcceuil(this.$dataStore.data);
+      this.acceuilDuration = acceuilDuration;
+    }
     },
   }
 

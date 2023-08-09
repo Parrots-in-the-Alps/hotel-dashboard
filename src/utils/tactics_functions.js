@@ -65,12 +65,55 @@ export const calculateOccupancyStats = function(reservationsData) {
     console.log(averageDurations)
     return averageDurations;
   }
-  
-export function timeStats(reservationsData){
-  reservationsData.forEach(reservation=>{
 
-  })
-}
+  export function timeBetweenResaCheckIn(reservations) {
+    let totalDuration = 0;
+    let validReservationsCount = 0;
+  
+    reservations.forEach(reservation => {
+      if (reservation.checked_in && reservation.created_at) {
+        const created_at = moment(reservation.created_at, 'YYYY/mm/DD' );
+        const checked_in = moment(reservation.checked_in, 'YYYY/mm/DD' );
+        const duration = created_at.diff(checked_in, 'days');
+        totalDuration += duration;
+        validReservationsCount++;
+      }
+    });
+  
+    if (validReservationsCount === 0) {
+      return null;
+    }
+  
+    const checkInDuration = totalDuration / validReservationsCount;
+  
+    return checkInDuration;
+  }
+
+
+
+  export function timeAcceuil(reservations) {
+    let totalDuration = 0;
+    let validReservationsCount = 0;
+  
+    reservations.forEach(reservation => {
+      if (reservation.checked_in && reservation.access.premiere_ouverture) {
+        const checked_in = moment(reservation.checked_in, 'YYYY/mm/DD' );
+        const access = moment(reservation.access.premiere_ouverture, 'YYYY/mm/DD' );
+        const duration = checked_in.diff(access, ' days');
+        totalDuration += duration;
+        validReservationsCount++;
+        console.log("zaza" + duration)
+      }
+    });
+  
+    if (validReservationsCount === 0) {
+      return null;
+    }
+  
+    const acceuilDuration = totalDuration / validReservationsCount;
+  
+    return acceuilDuration;
+  }
 
 
  
