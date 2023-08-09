@@ -65,3 +65,20 @@ export const calculateOccupancyStats = function(reservationsData) {
     console.log(averageDurations)
     return averageDurations;
   }
+
+  export function moneyStats(reservationsData){
+    let totalCartPrice = 0;
+
+    reservationsData.forEach(reservation => {
+      totalCartPrice += reservation.room.roomPrice * reservation.duration;
+    });
+    const cartPrice = Math.round(totalCartPrice / reservationsData.length);
+    return {
+      cartPrice,
+      totalCartPrice
+    }
+  }
+
+
+ 
+

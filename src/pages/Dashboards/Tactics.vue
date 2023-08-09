@@ -8,10 +8,10 @@
   </a-row>
 <div id="tactic_dashboard">
 
-  <a-row>
+  <a-row :gutter="[16,16]">
       
       <a-col :span="12">
-        <a-card  title="reservation" size="small" style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B; height: 100%" headStyle="background-color: #243236; color: #A7A9BE" class="card">
+        <a-card title="reservation" size="small" style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B; height: 100%" headStyle="background-color: #243236; color: #A7A9BE" class="card">
           <a-row class="centered-row">
             <a-col  :span="12">
               <RadialBar  :labels="['occupation']"  :series="[occupation]"></RadialBar>
@@ -70,7 +70,7 @@
       <Card title="Panier Moyen" class="card">
         <a-row class="centered-row">
           <a-col class="centered-content">
-            245€
+            {{ cartPrice }} €
           </a-col>
         </a-row>
       </Card>
@@ -80,7 +80,7 @@
       <Card title="Chiffre d'affaire" class="card">
         <a-row class="centered-row">
           <a-col class="centered-content">
-            30457€
+            {{totalCartPrice}} €
           </a-col>
         </a-row>
       </Card>
@@ -110,6 +110,9 @@
       </Card>
     </a-col>
   </a-row>
+
+
+ 
 </div>
 </template>
     
@@ -118,7 +121,7 @@ import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
 import apiRequester from "../../utils/apiRequester.js"
 import { dashboard2pdf } from "../../utils/vulcan_functions.js";
-import { translateDate, calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
+import { moneyStats, translateDate, calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
 import moment from "moment";
 
 export default {
@@ -134,6 +137,8 @@ export default {
       luxuryPercent: 0,
       suitePercent: 0,
       occupation: 0,
+      cartPrice: 0,
+      totalCartPrice: 0,
       averageDurations: 0,
       entryDate: moment().format('YYYY-MM-DD'), 
       exitDate: moment().add(1, 'days').format('YYYY-MM-DD'),
@@ -167,8 +172,8 @@ export default {
                     await this.$dataStore.getReservationsOnDates(this.entryDate, this.exitDate)
                     .then(response => {
                     this.calculateOccupancyStats();
-                    this.calculateAverageDurationByRoomType();
-                  
+                    this.calculateAverageDurationByRoomType();   
+                    this.moneyStats(); 
         });
                 } catch (error) {
                     console.error(error);
@@ -198,7 +203,15 @@ export default {
       const averageDurations = calculateAverageDurationByRoomType(this.$dataStore.data);
       this.averageDurations = averageDurations;
 
-    }
+    },
+    moneyStats() {
+      const {
+        cartPrice,
+        totalCartPrice
+      } =  moneyStats(this.$dataStore.data);
+      this.cartPrice = cartPrice;
+      this.totalCartPrice = totalCartPrice;
+    },
     },
   }
 
