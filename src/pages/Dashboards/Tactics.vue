@@ -123,8 +123,8 @@
 import { Card } from 'ant-design-vue';
 import html2pdf from "html2pdf.js";
 import apiRequester from "../../utils/apiRequester.js"
-import { dashboard2pdf } from "../../utils/vulcan_functions.js";
-import { moneyStats, translateDate, calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
+import { moneyStats, dashboard2pdf } from "../../utils/vulcan_functions.js";
+import { translateDate, calculateOccupancyStats, calculateAverageDurationByRoomType } from "../../utils/tactics_functions";
 import moment from "moment";
 
 export default {
