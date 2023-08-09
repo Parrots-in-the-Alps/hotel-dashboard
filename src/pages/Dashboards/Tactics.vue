@@ -7,7 +7,7 @@
     </a-col>
   </a-row>
 <div id="tactic_dashboard">
-  <div class="centered-row" v-if="isLoading"> <Loading></Loading></div>
+  <div v-if="isLoading"> <Loading></Loading></div>
   <div v-else>
   <a-row :gutter="[16,16]">
       
@@ -231,6 +231,8 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+
 
 .centered-div {
   display: flex;

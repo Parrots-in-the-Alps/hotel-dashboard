@@ -2,7 +2,7 @@
 
 
 
-<div class="container">
+<div class="container loading">
   <div class="loadingspinner">
     <div id="square1"></div>
     <div id="square2"></div>
@@ -110,6 +110,13 @@ export default {
     animation: square5 var(--duration) var(--delay) var(--timing-function) infinite,
                squarefadein var(--in-duration) calc(4 * var(--in-delay)) var(--in-timing-function) both;
   }
+
+  .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+}
 
   @keyframes square1 {
     0%      {left: calc( 0 * var(--offset) ); top: calc( 0 * var(--offset) ); }
