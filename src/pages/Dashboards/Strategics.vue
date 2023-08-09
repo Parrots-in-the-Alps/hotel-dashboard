@@ -18,14 +18,14 @@
                     :series="[ { name: 'precedently month', data: reservations_by_months.averageTimeBetweenReservationAndCheckIn.precedently_month }, { name: 'currently month', data: reservations_by_months.averageTimeBetweenReservationAndCheckIn.currently_month }]">
                 </Line>
             </Card>
-            <Card class="gap-20 mb-25" title="Temps d'accueil moyen"  v-if="reservations_by_months.roomOccupancyRateInTheFuture.precedently_month != null && reservations_by_months.roomOccupancyRateInTheFuture.currently_month != null">
-                <RadialBar :labels="['precedently month', 'currently month']" :series="[reservations_by_months.roomOccupancyRateInTheFuture.precedently_month < 1 ? 0 : reservations_by_months.roomOccupancyRateInTheFuture.precedently_month, reservations_by_months.roomOccupancyRateInTheFuture.currently_month < 1 ? 0 : reservations_by_months.roomOccupancyRateInTheFuture.currently_month]"></RadialBar> ajouter les couleurs aux props du composant
-            </Card>
-            <Card class="gap-20 mb-25" title="Taux de remplissage moyen">
+            <Card class="gap-20 mb-25" title="Temps d'accueil moyen">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
-                    :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
-                </Line>
-            </Card>
+                :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
+            </Line>
+        </Card>
+        <Card class="gap-20 mb-25" title="Taux de remplissage moyen"  v-if="reservations_by_months.roomOccupancyRateInTheFuture.precedently_month != null && reservations_by_months.roomOccupancyRateInTheFuture.currently_month != null">
+            <RadialBar :labels="['precedently month', 'currently month']" :series="[reservations_by_months.roomOccupancyRateInTheFuture.precedently_month < 1 ? 0 : reservations_by_months.roomOccupancyRateInTheFuture.precedently_month, reservations_by_months.roomOccupancyRateInTheFuture.currently_month < 1 ? 0 : reservations_by_months.roomOccupancyRateInTheFuture.currently_month]"></RadialBar> ajouter les couleurs aux props du composant
+        </Card>
         </div>
 
         <div class="container-unique mb-25">
