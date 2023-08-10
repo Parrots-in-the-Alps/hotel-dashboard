@@ -1,22 +1,10 @@
 import moment from "moment";
 
-const checkinStatistics = $dataStore.opsdata.checkInStats;
 
-export function getDonutData(){
-    let attendus = $dataStore.opsdata.
-    let donutdata = [];
+export function getCheckinPercentage(attendus,realises){
+   let percentage = (realises * 100)/attendus;
+   console.log(percentage);
 
-    return donutdata;
+    return percentage;
 }
 
-export function getCheckinHourLabels(){
-    
-}
-
-function getCheckinHour(){
-    checkinStatistics.forEach(element => {
-        
-    });
-    
-    return hours;
-}

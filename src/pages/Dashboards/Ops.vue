@@ -17,7 +17,7 @@
                         headStyle="background-color: #243236; color: #A7A9BE" class="card">
                         <div class="cardBody">
                             <Area :height="'330px'" :width="'1150px'"
-                                :labels="['8/3/2023, 11:54:20 AM', '8/4/2023, 11:54:20 AM', '8/5/2023, 11:54:20 AM', '8/6/2023, 11:54:20 AM', '8/7/2023, 11:54:20 AM']"
+                                :labels="['8/3/2023, 11:54:20 AM', '8/3/2023, 11:50:20 AM', '8/3/2023, 11:45:20 AM', '8/3/2023, 11:54:20 AM', '8/3/2023, 11:54:20 AM']"
                                 :series="[{ data: [44, 55, 41, 17, 15] }]"></Area>
 
                         </div>
@@ -31,9 +31,7 @@
                             bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE"
                             class="card">
                             <div class="cardBody">
-                                <Donut :height="'140px'" :width="'500px'"
-                                    :labels="['Apple', 'Mango', 'Banana', 'Papaya', 'Orange']"
-                                    :series="[44, 55, 41, 17, 15]" />
+                                <RadialBar :colors="['#f56905']" :height="'160px'" :labels="['']" :series="[checkinPercentage]"></RadialBar>
                             </div>
 
 
@@ -141,6 +139,8 @@ import Donut from '../../components/commons/chart/Donut.vue'
 import LineColumn from '../../components/commons/chart/LineColumn.vue'
 import Table from '../../components/commons/chart/Table.vue'
 
+import {getCheckinPercentage} from'../../utils/ops_dashboard.js'
+
 export default {
     name: "Ops",
     mounted() {
@@ -149,6 +149,7 @@ export default {
     data(){
         return{
             isLoading:false,
+            checkinPercentage:0
     }
     },
 
@@ -164,14 +165,12 @@ export default {
       const headers = {
         'Content-Type': 'application/json',
       };
-      const data = {
-        entryDate: this.entryDate,
-        exitDate: this.exitDate,
-      };
-      if (this.exitDate !== null && this.entryDate !== null) {
         try {
           await this.$dataStore.getOpsData()
             .then(response => {
+                this.checkinPercentage = getCheckinPercentage(
+                    this.$dataStore.opsdata.todayCheckins,
+                     this.$dataStore.opsdata.todayCheckedins)
             //   this.calculateOccupancyStats();
             //   this.calculateAverageDurationByRoomType();
             //   this.moneyStats();
@@ -189,7 +188,7 @@ export default {
     },
 
 
-    }
+    
 }
 </script>
     
