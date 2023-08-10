@@ -72,10 +72,16 @@ export const calculateOccupancyStats = function(reservationsData) {
   
     reservations.forEach(reservation => {
       if (reservation.checked_in && reservation.created_at) {
-        const created_at = moment(reservation.created_at, 'YYYY/mm/DD' );
-        const checked_in = moment(reservation.checked_in, 'YYYY/mm/DD' );
-        const duration = created_at.diff(checked_in, 'days');
-        totalDuration += duration;
+        // const created_at = moment(reservation.created_at, 'YYYY/mm/DD' );
+        // const checked_in = moment(reservation.checked_in, 'YYYY/mm/DD' );
+        // const duration = created_at.diff(checked_in, 'seconds');
+        const created_at = new Date(reservation.created_at);
+        const checked_in = new Date(reservation.checked_in);
+        const duration = (created_at - checked_in) / 1000;
+        const durationInSeconds = Math.ceil(duration / 60);
+        console.log("DURATION")
+        console.log(durationInSeconds)
+        totalDuration += durationInSeconds;
         validReservationsCount++;
       }
     });

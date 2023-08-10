@@ -23,7 +23,7 @@
               </a-col>
               <a-col :span="12">
                 <div class="element">Temps d'acceuil moyen : {{ acceuilDuration }}</div>
-                <div class="element">Temps entre réservation et check-in: {{ checkInDuration }}</div>
+                <div class="element">Temps réservation -> check-in: {{ checkInDuration }} Min</div>
               </a-col>
             </a-row>
           </a-card>
@@ -47,7 +47,7 @@
           <Card title="Utilisation des chambres" class="card">
             <a-row class="centered-row">
               <a-col :span="8">
-                <RadialBar :labels="['chambre standard']" :series="[standardPercent]"></RadialBar>
+                <RadialBar height="10px" :labels="['chambre standard']" :series="[standardPercent]"></RadialBar>
               </a-col>
               <a-col :span="8">
                 <RadialBar :labels="['chambre de luxe']" :series="[luxuryPercent]"></RadialBar>
