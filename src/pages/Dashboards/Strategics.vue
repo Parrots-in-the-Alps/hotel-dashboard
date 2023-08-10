@@ -10,11 +10,7 @@
             <a-month-picker class="gap-20 success" placeholder="Mois en cours" @change="onChange" />
             <button type="button" class="gap-20" @click="onClick">Download to PDF</button>
         </div>
-
-        <div class="container-unique mb-25" v-if="clone_currently_month != null && clone_precedently_month != null">
-            <p>{{ clone_precedently_month - clone_currently_month }}</p>
-        </div>
-
+        
         <div class="container-unique mb-25" v-if="error_message == null">
             <p>{{ error_message }}</p>
         </div>
