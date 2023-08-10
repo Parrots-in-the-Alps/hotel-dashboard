@@ -27,7 +27,7 @@
         {
           title: this.type === 'occupied' ? 'Libérée le' : 'Occupée le',
           dataIndex: 'liberee_le',
-          width: '35%',
+          width: '50%',
         }
       ],
       dataSource: [],
