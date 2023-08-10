@@ -18,8 +18,8 @@ export const useDataStore = defineStore('data', {
                 todayCheckedins:0,
                 checkInStats:null,
                 resaToCheckIn:null,
-                occupiedRooms:null,
-                availableRooms:null,
+                occupiedRooms:[],
+                availableRooms:[],
             },
             error_message: null
         }
