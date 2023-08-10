@@ -9,6 +9,18 @@ export const useDataStore = defineStore('data', {
                 precedently_month: null,
                 currently_month: null
             },
+            opsdata:{
+                customerCapacity:0,
+                clientInHotel:0,
+                totalAccessCards:0,
+                distributedCards:0,
+                todayCheckins:0,
+                todayCheckedins:0,
+                checkInStats:null,
+                resaToCheckIn:null,
+                occupiedRooms:null,
+                availableRooms:null,
+            },
             error_message: null
         }
     },
@@ -50,6 +62,28 @@ export const useDataStore = defineStore('data', {
             } catch (error) {
                 if (error.response.status != 200) {
                     this.error_message = error.response.data.message;
+                }
+            }
+        },
+
+        async getOpsData() {
+            try {
+                const result = await apiRequester.get("/api/opsDashBoard");
+                if (result.status == 200) {
+                    this.opsdata.customerCapacity = result.data.message.customerCapacity;
+                    this.opsdata.clientInHotel = result.data.message.clientInHotel;
+                    this.opsdata.totalAccessCards = result.data.message.totalAccessCards;
+                    this.opsdata.distributedCards = result.data.message.distributedCards;
+                    this.opsdata.todayCheckins = result.data.message.todayCheckins;
+                    this.opsdata.todayCheckedins = result.data.message.todayCheckedins;
+                    this.opsdata.checkInStats = result.data.message.checkinStats;
+                    this.opsdata.resaToCheckIn = result.data.message.resaToCheckin;
+                    this.opsdata.occupiedRooms = result.data.message.occupiedRooms;
+                    this.opsdata.availableRooms = result.data.message.availableRooms;
+                }
+            } catch (error) {
+                if (error.response.status != 200) {
+                    this.error_message = "error";
                 }
             }
         }

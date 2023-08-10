@@ -2,7 +2,10 @@
     <div>
         <button type="button" class="gap-20" @click="onClick">Download to PDF</button>
     </div>
-    <div class="main" id="ops_dashboard">
+    <div v-if="isLoading">
+        <Loading></Loading>
+    </div>
+    <div v-else class="main" id="ops_dashboard">
         <section class="section">
             <div class="title">
                 FLUX CLIENT
@@ -43,7 +46,7 @@
                             bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE"
                             class="card">
                             <div class="text">
-                                toto / 20
+                                {{ $dataStore.opsdata.distributedCards }} / {{ $dataStore.opsdata.totalAccessCards }}
 
                             </div>
                         </a-card>
@@ -54,7 +57,7 @@
                             bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE"
                             class="card">
                             <div class="text">
-                                toto / 20
+                                {{ $dataStore.opsdata.clientInHotel }} / {{ $dataStore.opsdata.customerCapacity }}
                             </div>
                         </a-card>
                     </div>
@@ -137,13 +140,55 @@ import Area from '../../components/commons/chart/Area.vue'
 import Donut from '../../components/commons/chart/Donut.vue'
 import LineColumn from '../../components/commons/chart/LineColumn.vue'
 import Table from '../../components/commons/chart/Table.vue'
+
 export default {
     name: "Ops",
+    mounted() {
+    this.fetchReservationsData();
+    },
+    data(){
+        return{
+            isLoading:false,
+    }
+    },
+
     methods: {
         onClick() {
             const dashboard = "ops_dashboard";
             dashboard2pdf(document.getElementById(dashboard), dashboard);
+        },
+
+    async fetchReservationsData() {
+      this.isLoading = true;
+
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+      const data = {
+        entryDate: this.entryDate,
+        exitDate: this.exitDate,
+      };
+      if (this.exitDate !== null && this.entryDate !== null) {
+        try {
+          await this.$dataStore.getOpsData()
+            .then(response => {
+            //   this.calculateOccupancyStats();
+            //   this.calculateAverageDurationByRoomType();
+            //   this.moneyStats();
+            //   this.timeBetweenResaCheckIn();
+            //   this.timeAcceuil();
+            //   this.serviceStats();
+            }).finally(() => {
+              this.isLoading = false;
+            });
+        } catch (error) {
+          console.error(error);
+          this.isLoading = false;
         }
+      }
+    },
+
+
     }
 }
 </script>
