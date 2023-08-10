@@ -8,4 +8,21 @@ export function getCheckinPercentage(attendus,realises){
     return percentage;
 }
 
+export function getChekinPerHourCount(object){
+    let checkinCount = [];
+    
+    return checkinCount;
+}
+
+
+
+export function translateHour(date){
+    date =  JSON.parse(JSON.stringify(date));
+return moment(date).format('HH');
+}
+
+export function translateHourTime(date){
+    date =  JSON.parse(JSON.stringify(date));
+return moment(date).format('HH-mm-jss');
+}
 
