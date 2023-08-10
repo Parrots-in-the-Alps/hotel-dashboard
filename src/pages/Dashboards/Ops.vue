@@ -16,7 +16,7 @@
                         style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B;"
                         headStyle="background-color: #243236; color: #A7A9BE" class="card">
                         <div class="cardBody">
-                            <Area :height="'330px'" :width="'1150px'"
+                            <Area :height="'315px'" :width="'1150px'"
                                 :labels="['8/3/2023, 11:54:20 AM', '8/3/2023, 11:50:20 AM', '8/3/2023, 11:45:20 AM', '8/3/2023, 11:54:20 AM', '8/3/2023, 11:54:20 AM']"
                                 :series="[{ data: [44, 55, 41, 17, 15] }]"></Area>
 
@@ -31,7 +31,7 @@
                             bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE"
                             class="card">
                             <div class="cardBody">
-                                <RadialBar :colors="['#f56905']" :height="'160px'" :labels="['']" :series="[checkinPercentage]"></RadialBar>
+                                <RadialBar :colors="['#f56905']" :height="'148px'" :labels="['']" :series="[checkinPercentage]"></RadialBar>
                             </div>
 
 
