@@ -44,7 +44,7 @@
             </Card>
             <Card title="chiffre d'affaire" class="mb-25 gap-20"
                 v-if="reservations_by_months.turnover.precedently_month != false && reservations_by_months.turnover.currently_month != false">
-                <Bar :labels="['precedently month', 'currently month']"
+                <Bar :labels="['precedently month', 'currently month']" :colors="['#00E396', '#F5222D']"
                     :series="[{ name: '', data: [2988, 3560] }]">
                 </Bar>
             </Card>
