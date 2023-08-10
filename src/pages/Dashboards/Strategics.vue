@@ -26,7 +26,7 @@
             <Card class="gap-20 mb-25" title="Temps d'accueil moyen"
                 v-if="clone_precedently_month != null && clone_currently_month != null">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
-                    :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
+                    :series="[{ name: '', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: '', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
                 </Line>
             </Card>
             <Card class="gap-20 mb-25" title="Taux de remplissage moyen"
