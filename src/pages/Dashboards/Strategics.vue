@@ -134,12 +134,14 @@ export default {
             this.reservations_by_months.turnover.currently_month = true;
             this.reservations_by_months.numberOfReservations.precedently_month = numberOfReservations(this.$dataStore.reservations_by_months.precedently_month);
             this.reservations_by_months.numberOfReservations.currently_month = numberOfReservations(this.$dataStore.reservations_by_months.currently_month);
-        }
+        },
+        onClick() {
+            console.log("toto fait des pdf avec son nez");
+            const dashboard = "strategics_dashboard";
+            if(this.clone_precedently_month != null && this.clone_precedently_month != null) dashboard2pdf(document.getElementById(dashboard), dashboard);
+        },
     },
-    onClick() {
-        const dashboard = "strategics_dashboard";
-        dashboard2pdf(document.getElementById(dashboard), dashboard);
-    },
+    
 }
 
 </script>
