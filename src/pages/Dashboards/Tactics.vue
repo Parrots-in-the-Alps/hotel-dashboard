@@ -19,11 +19,11 @@
             class="card">
             <a-row class="centered-row">
               <a-col :span="12">
-                <RadialBar :labels="['occupation']" :series="[occupation]"></RadialBar>
+                <RadialBar height="175%" :labels="['occupation']" :series="[occupation]"></RadialBar>
               </a-col>
               <a-col :span="12">
                 <div class="element">Temps d'acceuil moyen : {{ acceuilDuration }}</div>
-                <div class="element">Temps réservation -> check-in: {{ checkInDuration }} Min</div>
+                <div class="element">Temps réservation -> check-in: {{ checkInDuration }}</div>
               </a-col>
             </a-row>
           </a-card>
@@ -33,7 +33,7 @@
           <a-card title="temps moyen d'une réservation par type de chambre" size="small"
             style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B;"
             headStyle="background-color: #243236; color: #A7A9BE" class="card">
-            <Bar height="320px" :labels="['standard', 'luxe', 'suite']"
+            <Bar height="175%"  :labels="['standard', 'luxe', 'suite']" :colors="['#6342f5']"
               :series="[{ name: 'temps en jour', data: [averageDurations.standard ? averageDurations.standard : null, averageDurations.luxury ? averageDurations.luxury : null, averageDurations.suite ? averageDurations.suite : null] }]">
             </Bar>
           </a-card>
@@ -47,13 +47,13 @@
           <Card title="Utilisation des chambres" class="card">
             <a-row class="centered-row">
               <a-col :span="8">
-                <RadialBar height="10px" :labels="['chambre standard']" :series="[standardPercent]"></RadialBar>
+                <RadialBar :colors="['#f56905']" height="200%" :labels="['chambre standard']" :series="[standardPercent]"></RadialBar>
               </a-col>
               <a-col :span="8">
-                <RadialBar :labels="['chambre de luxe']" :series="[luxuryPercent]"></RadialBar>
+                <RadialBar :colors="['#09f505']" height="200%" :labels="['chambre de luxe']" :series="[luxuryPercent]"></RadialBar>
               </a-col>
               <a-col :span="8">
-                <RadialBar :labels="['suite']" :series="[suitePercent]"></RadialBar>
+                <RadialBar :colors="['#f5f105']" height="200%" :labels="['suite']" :series="[suitePercent]"></RadialBar>
               </a-col>
             </a-row>
           </Card>
@@ -63,24 +63,19 @@
 
 
 
-      <a-row>
-        <a-col :span="24">
+      <a-row :gutter="[16, 16]">
+        <a-col :span="12">
           <Card title="Services" class="card">
-            <a-row class="centered-row">
-              <a-col :span="8">
+            
                 <Donut
+                  height="188%" width="100%"
                   :labels="['Petit déjeuner', 'Spectacle de lave', 'Demie-pension', 'Pension-complète', 'Télévision', 'Wifi', 'Pressing']"
                   :series="[serviceCount.breakfast, serviceCount.lavaShow, serviceCount.halfBoard, serviceCount.fullBoard, serviceCount.tv, serviceCount.wifi, serviceCount.laundry  ]"></Donut>
-              </a-col>
-            </a-row>
+            
           </Card>
         </a-col>
-      </a-row>
 
-
-
-      <a-row class="centered-div">
-        <a-col :span="7">
+        <a-col :span="12">
           <Card title="Panier Moyen" class="card">
             <a-row class="centered-row">
               <a-col class="centered-content">
@@ -88,28 +83,29 @@
               </a-col>
             </a-row>
           </Card>
-        </a-col>
-
-        <a-col :span="7">
-          <Card title="Chiffre d'affaire" class="card">
+        <a-divider hidden />
+        <Card title="Chiffre d'affaire" class="card">
             <a-row class="centered-row">
               <a-col class="centered-content">
                 {{ totalCartPrice }} €
               </a-col>
             </a-row>
           </Card>
-        </a-col>
-
-        <a-col :span="7">
-          <Card title="Nombre de réservations" class="card">
+        <a-divider hidden />
+        <Card title="Nombre de réservations" class="card">
             <a-row class="centered-row">
               <a-col class="centered-content">
                 {{ this.$dataStore.data ? this.$dataStore.data.length : "..." }}
               </a-col>
             </a-row>
           </Card>
+        
         </a-col>
       </a-row>
+
+
+
+    
 
       
     </div>
@@ -272,8 +268,8 @@ export default {
 }
 
 .element {
-  margin: 30px;
-  font-size: 20px;
+
+  font-size: 18px;
   /* Ajustez la valeur de la marge selon vos préférences */
 }
 

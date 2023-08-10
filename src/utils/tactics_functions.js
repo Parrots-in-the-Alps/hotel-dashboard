@@ -78,7 +78,7 @@ export const calculateOccupancyStats = function(reservationsData) {
         const created_at = new Date(reservation.created_at);
         const checked_in = new Date(reservation.checked_in);
         const duration = (created_at - checked_in) / 1000;
-        const durationInSeconds = Math.ceil(duration / 60);
+        const durationInSeconds = Math.ceil(duration);
         console.log("DURATION")
         console.log(durationInSeconds)
         totalDuration += durationInSeconds;
@@ -90,9 +90,20 @@ export const calculateOccupancyStats = function(reservationsData) {
       return null;
     }
   
-    const checkInDuration = totalDuration / validReservationsCount;
+    const checkInDurationInSeconds = totalDuration / validReservationsCount;
   
-    return checkInDuration;
+    if (checkInDurationInSeconds >= 86400) { // 1 day = 24 * 60 * 60 seconds
+      const checkInDurationInDays = checkInDurationInSeconds / 86400;
+      return `${Math.ceil(checkInDurationInDays)} days`;
+  } else if (checkInDurationInSeconds >= 3600) { // 1 hour = 60 * 60 seconds
+      const checkInDurationInHours = checkInDurationInSeconds / 3600;
+      return `${Math.ceil(checkInDurationInHours)} H`;
+  } else if (checkInDurationInSeconds >= 60) { // 1 minute = 60 seconds
+      const checkInDurationInMinutes = checkInDurationInSeconds / 60;
+      return `${Math.ceil(checkInDurationInMinutes)} min`;
+  } else {
+      return `${Math.ceil(checkInDurationInSeconds)} sec`;
+  }
   }
 
 

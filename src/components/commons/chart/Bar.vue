@@ -9,14 +9,15 @@ export default {
   name: 'Bar',
   data() {
     return {
-      colors: this.colors,
+      
       chartOptions: {
         chart: {
           id: 'ZOUNGOU'
         },
         xaxis: {
           categories: this.labels
-        }
+        },
+        colors: this.colors,
       }
     }
   },

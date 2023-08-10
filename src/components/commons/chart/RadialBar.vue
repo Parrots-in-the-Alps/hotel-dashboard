@@ -1,6 +1,6 @@
 <template>
   <div>
-    <apexchart type="radialBar" :options="plotOptions" :series="series"></apexchart>
+    <apexchart type="radialBar" :height="height" :options="plotOptions" :series="series"></apexchart>
   </div>
 </template>
 
@@ -19,7 +19,10 @@ export default {
       required: true,
     },
     colors: {
-      type: String,
+      type: Array,
+      required: false,
+    },
+    height: {
       required: false,
     },
   },
