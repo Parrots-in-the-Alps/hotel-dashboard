@@ -12,6 +12,7 @@ export const useUserStore = defineStore('user', {
             }
         }
     },
+    persist: true,
     actions: {
         async login(credentials) {
             const token = (await apiRequester.post("/api/login", credentials)).data.token
