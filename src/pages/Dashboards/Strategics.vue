@@ -64,14 +64,14 @@
 <script>
 import { dashboard2pdf, moneyStats } from "../../utils/vulcan_functions.js";
 import { addDayToDate, averageTimeBetweenReservationAndCheckIn, roomOccupancyRateInTheFuture, fillingRate, numberOfReservations } from "../../utils/strategics_dashboard.js"
-
+import moment from "moment";
 export default {
     name: "Strategics",
     data() {
         return {
             isLoading: false,
-            precedently_month: null,
-            currently_month: null,
+            precedently_month: moment().format('MM/DD/YYYY'),
+            currently_month: moment().format('MM/DD/YYYY'),
             clone_precedently_month: null,
             clone_currently_month: null,
             error_message: null,
@@ -96,10 +96,15 @@ export default {
             }
         }
     },
+    mounted(){
+        this.checkApiCall();
+    },
     methods: {
         onChange(date, dateString) {
             if (this.precedently_month === null) {
                 this.precedently_month = addDayToDate(dateString);
+                console.log('date date date ')
+                console.log(this.precedently_month)
             } else if (this.currently_month === null) {
                 this.currently_month = addDayToDate(dateString);
             }
