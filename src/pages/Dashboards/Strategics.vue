@@ -11,7 +11,11 @@
             <button type="button" class="gap-20" @click="onClick">Download to PDF</button>
         </div>
 
-        <div class="container-unique mb-25" v-if="error_message != null">
+        <div class="container-unique mb-25" v-if="clone_currently_month != null && clone_precedently_month != null">
+            <p>{{ clone_precedently_month - clone_currently_month }}</p>
+        </div>
+
+        <div class="container-unique mb-25" v-if="error_message == null">
             <p>{{ error_message }}</p>
         </div>
 
@@ -23,11 +27,12 @@
                     :series="[{ name: 'precedently month', data: reservations_by_months.averageTimeBetweenReservationAndCheckIn.precedently_month }, { name: 'currently month', data: reservations_by_months.averageTimeBetweenReservationAndCheckIn.currently_month }]">
                 </Line>
             </Card>
-            <!-- <Card class="gap-20 mb-25" title="Temps d'accueil moyen">
+            <Card class="gap-20 mb-25" title="Temps d'accueil moyen"
+                v-if="precedently_month != null && currently_month != null">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
                     :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
                 </Line>
-            </Card> -->
+            </Card>
             <Card class="gap-20 mb-25" title="Taux de remplissage moyen"
                 v-if="reservations_by_months.roomOccupancyRateInTheFuture.precedently_month != null && reservations_by_months.roomOccupancyRateInTheFuture.currently_month != null">
                 <RadialBar :labels="['precedently month', 'currently month']" :colors="['#00E396', '#F5222D']"
@@ -41,15 +46,20 @@
                 <RadialBar :labels="['']" :colors="['#F5222D']"
                     :series="[reservations_by_months.fillingRate < 1 ? 0 : reservations_by_months.fillingRate]"></RadialBar>
             </Card>
-            <Card title="chiffre d'affaire" class="mb-25" v-if="reservations_by_months.turnover.precedently_month != null && reservations_by_months.turnover.currently_month != null">
-                <Bar :labels="['precedently month', 'currently month']" :series="[{ name: '' ,  data: reservations_by_months.turnover.precedently_month }, { name: '' ,  data: reservations_by_months.turnover.currently_month }]"></Bar>
+            <Card title="chiffre d'affaire" class="mb-25"
+                v-if="reservations_by_months.turnover.precedently_month != null && reservations_by_months.turnover.currently_month != null">
+                <Bar :labels="['precedently month', 'currently month']"
+                    :series="[{ name: '', data: [reservations_by_months.turnover.precedently_month, reservations_by_months.turnover.currently_month] }]">
+                </Bar>
             </Card>
-            <!-- <Card title="Nombre de réservation" class="mb-25" v-if="reservations_by_months.numberOfReservations.precedently_month != null && reservations_by_months.numberOfReservations.currently_month != null">
-                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :title_bottom="'reservations'" :title_left="'jours'"
-                    :series="[{ name: 'precedently month', data: reservations_by_months.numberOfReservations.precedently_month }, { name: 'currently month', data: reservations_by_months.numberOfReservations.currently_month }]"
+            <Card title="Nombre de réservation" class="mb-25"
+                v-if="reservations_by_months.numberOfReservations.precedently_month != null && reservations_by_months.numberOfReservations.currently_month != null">
+                <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']" :title_bottom="'reservations'"
+                    :title_left="'jours'"
+                    :series="[{ name: 'precedently month', data: [reservations_by_months.numberOfReservations.precedently_month] }, { name: 'currently month', data: [reservations_by_months.numberOfReservations.currently_month] }]"
                     :categories="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']">
                 </Line>
-            </Card> -->  <!-- erreur non résolue -->
+            </Card>
         </div>
 
     </div>
@@ -66,6 +76,8 @@ export default {
             isLoading: false,
             precedently_month: null,
             currently_month: null,
+            clone_precedently_month: null,
+            clone_currently_month: null,
             error_message: null,
             reservations_by_months: {
                 averageTimeBetweenReservationAndCheckIn: {
@@ -100,8 +112,12 @@ export default {
         async checkApiCall() {
             if (this.currently_month !== null && this.precedently_month !== null) {
                 this.isLoading = true;
+                this.clone_precedently_month = this.precedently_month;
+                this.clone_currently_month = this.currently_month;
+                this.precedently_month = null;
+                this.currently_month = null;
                 try {
-                    await this.$dataStore.getReservationsByMonths(this.precedently_month, this.currently_month);
+                    await this.$dataStore.getReservationsByMonths(this.clone_precedently_month, this.clone_currently_month);
                     const error = this.$dataStore.error_message;
                     this.error_message = error != null ? error : null;
                     if (this.error_message == null) this.calculator();
@@ -118,12 +134,10 @@ export default {
             this.reservations_by_months.roomOccupancyRateInTheFuture.precedently_month = roomOccupancyRateInTheFuture(this.$dataStore.reservations_by_months.precedently_month);
             this.reservations_by_months.roomOccupancyRateInTheFuture.currently_month = roomOccupancyRateInTheFuture(this.$dataStore.reservations_by_months.currently_month);
             this.reservations_by_months.fillingRate = fillingRate();
-            //todo graph 5: 
-            // this.reservations_by_months.turnover.precedently_month = moneyStats(this.$dataStore.reservations_by_months.precedently_month);
-            // this.reservations_by_months.turnover.currently_month = moneyStats(this.$dataStore.reservations_by_months.currently_month);
-            //todo graph 6: 
-            // this.reservations_by_months.numberOfReservations.precedently_month = numberOfReservations(this.$dataStore.reservations_by_months.precedently_month);
-            // this.reservations_by_months.numberOfReservations.currently_month = numberOfReservations(this.$dataStore.reservations_by_months.currently_month);
+            this.reservations_by_months.turnover.precedently_month = moneyStats(this.$dataStore.reservations_by_months.precedently_month);
+            this.reservations_by_months.turnover.currently_month = moneyStats(this.$dataStore.reservations_by_months.currently_month);
+            this.reservations_by_months.numberOfReservations.precedently_month = numberOfReservations(this.$dataStore.reservations_by_months.precedently_month);
+            this.reservations_by_months.numberOfReservations.currently_month = numberOfReservations(this.$dataStore.reservations_by_months.currently_month);
         }
     },
     onClick() {
