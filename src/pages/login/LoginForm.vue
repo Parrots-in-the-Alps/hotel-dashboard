@@ -71,7 +71,7 @@ export default {
     async login() {
       // TODO do some validations first
       await this.$userStore.login(this.credentials);
-     this.$userStore.title = 'DASHBOARD TACTIQUE'
+     this.$userStore.title = 'ACCUEIL'
     }
   }
 };

@@ -22,7 +22,7 @@ export const useUserStore = defineStore('user', {
             // The user will be available in all our components via `this.$userStore.user` thanks to our custom appPlugin`
             this.user = (await apiRequester.get("/api/user/info")).data
             this.logged = true;
-            router.push({ path: '/tactics' })
+            router.push({ path: '/' })
         },
         async logOut(){
             this.logged = false;
