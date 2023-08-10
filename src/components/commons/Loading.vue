@@ -1,24 +1,26 @@
 <template>
   <div class="container loading">
     <div class="loadingspinner">
-      <div id="square1" :style="{ '--loading-color-square1': bgColorSquare1 }"></div>
-      <div id="square2" :style="{ '--loading-color-square2': bgColorSquare2 }"></div>
-      <div id="square3" :style="{ '--loading-color-square3': bgColorSquare3 }"></div>
-      <div id="square4" :style="{ '--loading-color-square4': bgColorSquare4 }"></div>
-      <div id="square5" :style="{ '--loading-color-square5': bgColorSquare5 }"></div>
+      <div id="square1" :style="{ '--loading-color-square1': getRandomColor() }"></div>
+      <div id="square2" :style="{ '--loading-color-square2': getRandomColor() }"></div>
+      <div id="square3" :style="{ '--loading-color-square3': getRandomColor() }"></div>
+      <div id="square4" :style="{ '--loading-color-square4': getRandomColor() }"></div>
+      <div id="square5" :style="{ '--loading-color-square5': getRandomColor() }"></div>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "Loading",
-  props: {
-    bgColorSquare1: String,
-    bgColorSquare2: String,
-    bgColorSquare3: String,
-    bgColorSquare4: String,
-    bgColorSquare5: String,
-  },
+  
+  methods: {
+    getRandomColor() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r}, ${g}, ${b})`;
+    },
+  }
 }
 
 </script>
