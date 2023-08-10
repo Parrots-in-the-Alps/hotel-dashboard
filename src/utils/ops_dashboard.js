@@ -8,3 +8,4 @@ export function getCheckinPercentage(attendus,realises){
     return percentage;
 }
 
+
