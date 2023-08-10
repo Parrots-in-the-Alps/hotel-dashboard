@@ -1,5 +1,8 @@
 <template>
-    <div class="main">
+    <div>
+        <button type="button" class="gap-20" @click="onClick">Download to PDF</button>
+    </div>
+    <div class="main" id="ops_dashboard">
         <section class="section">
             <div class="title">
                 FLUX CLIENT
@@ -40,8 +43,8 @@
                             bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE"
                             class="card">
                             <div class="text">
-                                    toto / 20
-                                
+                                toto / 20
+
                             </div>
                         </a-card>
                     </div>
@@ -51,7 +54,7 @@
                             bodyStyle="background-color: #607D8B;" headStyle="background-color: #243236; color: #A7A9BE"
                             class="card">
                             <div class="text">
-                                    toto / 20
+                                toto / 20
                             </div>
                         </a-card>
                     </div>
@@ -129,13 +132,19 @@
 </template>
     
 <script>
-import Card from '../../components/commons/Card.vue'
+import { dashboard2pdf } from "../../utils/vulcan_functions.js";
 import Area from '../../components/commons/chart/Area.vue'
 import Donut from '../../components/commons/chart/Donut.vue'
 import LineColumn from '../../components/commons/chart/LineColumn.vue'
 import Table from '../../components/commons/chart/Table.vue'
 export default {
-    name: "Ops"
+    name: "Ops",
+    methods: {
+        onClick() {
+            const dashboard = "ops_dashboard";
+            dashboard2pdf(document.getElementById(dashboard), dashboard);
+        }
+    }
 }
 </script>
     
@@ -149,11 +158,11 @@ export default {
 }
 
 .section {
-    height:100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     margin-bottom: 7%;
-    gap:1vw;
+    gap: 1vw;
 }
 
 /* .section2 {
@@ -173,7 +182,7 @@ export default {
     display: flex;
     flex-direction: column;
     margin-bottom: 10%;
-    gap:1vw;
+    gap: 1vw;
 }
 
 .title {
@@ -217,7 +226,7 @@ export default {
     flex-direction: row;
     width: 100%;
     height: 100%;
-    gap:1vw;
+    gap: 1vw;
 }
 
 .lowerrow {
@@ -242,7 +251,7 @@ export default {
     width: 30%;
     display: flex;
     flex-direction: column;
-    gap:0.77vw;
+    gap: 0.77vw;
 
 }
 
@@ -281,7 +290,7 @@ export default {
     align-items: center;
 }
 
-.text{
+.text {
     height: 100%;
     width: 100%;
     display: flex;
