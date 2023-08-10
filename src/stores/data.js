@@ -84,8 +84,8 @@ export const useDataStore = defineStore('data', {
             } catch (error) {
                 if (error.response.status != 200) {
                     this.error_message = "error";
-                }
+                }   
             }
         }
-    }
+    },
 })
