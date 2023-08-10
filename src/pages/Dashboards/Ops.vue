@@ -16,8 +16,8 @@
                         style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B;"
                         headStyle="background-color: #243236; color: #A7A9BE" class="card">
                         <div class="cardBody">
-                            <Bar height="175%"  :labels="['08-09', '', 'suite']" :colors="['#6342f5']"
-              :series="[{ name: 'temps en jour', data: [] }]"></Bar>
+                            <Bar :height="'315px'" :width="'1150px'"  :labels="['08-09', '09-10', '10-11', '11-12', '12-13', '13-14','14-15','15-16','16-17','17-18','18-19']" :colors="['#6342f5']"
+              :series="[{ name: 'nombre', data: [12,0,0,12,0,0,12,12,0,0,50] }]"></Bar>
 
                         </div>
 
