@@ -114,9 +114,9 @@ export const calculateOccupancyStats = function(reservationsData) {
   
     reservations.forEach(reservation => {
       if (reservation.checked_in && reservation.access.premiere_ouverture) {
-        const checked_in = moment(reservation.checked_in, 'YYYY/mm/DD' );
-        const access = moment(reservation.access.premiere_ouverture, 'YYYY/mm/DD' );
-        const duration = checked_in.diff(access, ' days');
+        const checked_in = new Date(reservation.checked_in);
+        const access = new Date(reservation.access.premiere_ouverture);
+        const duration = (access - checked_in) / 10000
         totalDuration += duration;
         validReservationsCount++;
         console.log("zaza" + duration)
@@ -129,7 +129,18 @@ export const calculateOccupancyStats = function(reservationsData) {
   
     const acceuilDuration = totalDuration / validReservationsCount;
   
-    return acceuilDuration;
+    if (acceuilDuration >= 86400) { // 1 day = 24 * 60 * 60 seconds
+      const checkInDurationInDays = acceuilDuration / 86400;
+      return `${Math.ceil(checkInDurationInDays)} days`;
+  } else if (acceuilDuration >= 3600) { // 1 hour = 60 * 60 seconds
+      const checkInDurationInHours = acceuilDuration / 3600;
+      return `${Math.ceil(checkInDurationInHours)} H`;
+  } else if (acceuilDuration >= 60) { // 1 minute = 60 seconds
+      const checkInDurationInMinutes = acceuilDuration / 60;
+      return `${Math.ceil(checkInDurationInMinutes)} min`;
+  } else {
+      return `${Math.ceil(acceuilDuration)} sec`;
+  }
   }
 
 

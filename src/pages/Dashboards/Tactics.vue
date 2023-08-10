@@ -68,7 +68,7 @@
           <Card title="Services" class="card">
             
                 <Donut
-                  height="188%" width="100%"
+                  height="218%" width="100%"
                   :labels="['Petit déjeuner', 'Spectacle de lave', 'Demie-pension', 'Pension-complète', 'Télévision', 'Wifi', 'Pressing']"
                   :series="[serviceCount.breakfast, serviceCount.lavaShow, serviceCount.halfBoard, serviceCount.fullBoard, serviceCount.tv, serviceCount.wifi, serviceCount.laundry  ]"></Donut>
             
@@ -78,7 +78,7 @@
         <a-col :span="12">
           <Card title="Panier Moyen" class="card">
             <a-row class="centered-row">
-              <a-col class="centered-content">
+              <a-col class="centered-content element2">
                 {{ averageCartPrice }} €
               </a-col>
             </a-row>
@@ -86,7 +86,7 @@
         <a-divider hidden />
         <Card title="Chiffre d'affaire" class="card">
             <a-row class="centered-row">
-              <a-col class="centered-content">
+              <a-col class="centered-content element2">
                 {{ totalCartPrice }} €
               </a-col>
             </a-row>
@@ -94,7 +94,7 @@
         <a-divider hidden />
         <Card title="Nombre de réservations" class="card">
             <a-row class="centered-row">
-              <a-col class="centered-content">
+              <a-col class="centered-content element2">
                 {{ this.$dataStore.data ? this.$dataStore.data.length : "..." }}
               </a-col>
             </a-row>
@@ -271,6 +271,9 @@ export default {
 
   font-size: 18px;
   /* Ajustez la valeur de la marge selon vos préférences */
+}
+.element2{
+  font-size: 24px;
 }
 
 .card {
