@@ -1,40 +1,88 @@
 <template>
   <a-row align="top" class="toto">
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
     <a-col :span="6">
-      <Loading :bgColor="getRandomColor()"></Loading>
+      <Loading :bgColorSquare1="getRandomColor()"
+       :bgColorSquare2="getRandomColor()"
+        :bgColorSquare3="getRandomColor()"
+         :bgColorSquare4="getRandomColor()"
+          :bgColorSquare5="getRandomColor()"></Loading>
     </a-col>
   </a-row>
 </template>
