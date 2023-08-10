@@ -112,7 +112,7 @@
                         style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B;"
                         headStyle="background-color: #243236; color: #A7A9BE" class="card">
                         <div class="cardBody">
-                            <Table type="occupied"></Table>
+                            <OccupiedRooms type="occupied"></OccupiedRooms>
                         </div>
                     </a-card>
                 </div>
@@ -121,7 +121,7 @@
                         style="box-shadow: 2px 2px 3px black; border-color: black;" bodyStyle="background-color: #607D8B;"
                         headStyle="background-color: #243236; color: #A7A9BE" class="card">
                         <div class="cardBody">
-                            <Table type="occupied"></Table>
+                            <AvailableRooms></AvailableRooms>
                         </div>
                     </a-card>
 
@@ -136,58 +136,53 @@ import { dashboard2pdf } from "../../utils/vulcan_functions.js";
 import Area from '../../components/commons/chart/Area.vue'
 import Donut from '../../components/commons/chart/Donut.vue'
 import LineColumn from '../../components/commons/chart/LineColumn.vue'
-import Table from '../../components/commons/chart/Table.vue'
+
 
 import {getCheckinPercentage} from'../../utils/ops_dashboard.js'
+import AvailableRooms from "../../components/commons/chart/AvailableRooms.vue";
 
 export default {
     name: "Ops",
     mounted() {
-    this.fetchReservationsData();
+        this.fetchReservationsData();
     },
-    data(){
-        return{
-            isLoading:false,
-            checkinPercentage:0
-    }
+    data() {
+        return {
+            isLoading: false,
+            checkinPercentage: 0
+        };
     },
-
     methods: {
         onClick() {
             const dashboard = "ops_dashboard";
             dashboard2pdf(document.getElementById(dashboard), dashboard);
         },
-
-    async fetchReservationsData() {
-      this.isLoading = true;
-
-      const headers = {
-        'Content-Type': 'application/json',
-      };
-        try {
-          await this.$dataStore.getOpsData()
-            .then(response => {
-                this.checkinPercentage = getCheckinPercentage(
-                    this.$dataStore.opsdata.todayCheckins,
-                     this.$dataStore.opsdata.todayCheckedins)
-            //   this.calculateOccupancyStats();
-            //   this.calculateAverageDurationByRoomType();
-            //   this.moneyStats();
-            //   this.timeBetweenResaCheckIn();
-            //   this.timeAcceuil();
-            //   this.serviceStats();
-            }).finally(() => {
-              this.isLoading = false;
-            });
-        } catch (error) {
-          console.error(error);
-          this.isLoading = false;
+        async fetchReservationsData() {
+            this.isLoading = true;
+            const headers = {
+                'Content-Type': 'application/json',
+            };
+            try {
+                await this.$dataStore.getOpsData()
+                    .then(response => {
+                    this.checkinPercentage = getCheckinPercentage(this.$dataStore.opsdata.todayCheckins, this.$dataStore.opsdata.todayCheckedins);
+                    //   this.calculateOccupancyStats();
+                    //   this.calculateAverageDurationByRoomType();
+                    //   this.moneyStats();
+                    //   this.timeBetweenResaCheckIn();
+                    //   this.timeAcceuil();
+                    //   this.serviceStats();
+                }).finally(() => {
+                    this.isLoading = false;
+                });
+            }
+            catch (error) {
+                console.error(error);
+                this.isLoading = false;
+            }
         }
-      }
     },
-
-
-    
+    components: { AvailableRooms }
 }
 </script>
     
