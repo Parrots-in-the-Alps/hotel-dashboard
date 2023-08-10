@@ -21,9 +21,9 @@ export const calculateOccupancyStats = function(reservationsData) {
             }
     });
   
-    const standardPercent = (standardCount / 25) * 100;
-    const luxuryPercent = (luxuryCount / 5) * 100;
-    const suitePercent = (suiteCount / 1) * 100;
+    const standardPercent = Math.round((standardCount / 25) * 100);
+    const luxuryPercent = Math.round((luxuryCount / 5) * 100);
+    const suitePercent = Math.round((suiteCount / 1) * 100);
     const occupation = Math.round(((standardCount + luxuryCount + suiteCount) / 31) *100);
   
     return {
@@ -113,6 +113,54 @@ export const calculateOccupancyStats = function(reservationsData) {
     const acceuilDuration = totalDuration / validReservationsCount;
   
     return acceuilDuration;
+  }
+
+
+
+  export function serviceStats(reservations){
+
+    const serviceCount = {
+      breakfast: 0,
+      lavaShow: 0,
+      halfBoard: 0,
+      fullBoard: 0,
+      laundry: 0,
+      tv: 0,
+      wifi:0
+    }
+
+    reservations.forEach(reservation =>{
+
+      reservation.services.forEach(service => {
+        switch(service.serviceName){
+          case 'breakfast':
+            serviceCount.breakfast ++
+            break;
+          case 'lava show' :
+            serviceCount.lavaShow ++
+            break;
+          case 'half-board' :
+            serviceCount.halfBoard ++
+            break;
+          case 'full-board' :
+            serviceCount.fullBoard ++
+            break;
+          case 'laundry service' :
+            serviceCount.laundry ++
+            break;
+          case '4K-TV' :
+            serviceCount.tv ++
+            break;
+          case 'Wifi' :
+            serviceCount.wifi ++
+            break;
+
+        }
+      })
+
+    })
+
+    return serviceCount
   }
 
 
