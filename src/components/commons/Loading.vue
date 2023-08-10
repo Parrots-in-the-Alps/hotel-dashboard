@@ -2,7 +2,7 @@
 
 
 
-<div class="container loading">
+<div class="container loading" :style="{ '--loading-color': bgColor }">
   <div class="loadingspinner">
     <div id="square1"></div>
     <div id="square2"></div>
@@ -17,6 +17,9 @@
 <script>
 export default {
     name: "Loading",
+    props: {
+    bgColor: String, // Nouvelle prop pour la couleur de fond
+  },
   }
 
 </script>
@@ -60,9 +63,11 @@ export default {
     position: relative;
   }
 
+  
+
   .loadingspinner div {
     display: inline-block;
-    background: #FF9800;
+    background: var(--loading-color);
     /*background: var(--text-color);*/
     /*box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);*/
     border: none;
