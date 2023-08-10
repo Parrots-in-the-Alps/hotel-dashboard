@@ -5,7 +5,8 @@ import { router } from '../router/index.js'
 export const useUserStore = defineStore('user', {
     state() {
         return {
-            logged: true,
+            logged: false,
+            title: 'login',
             user: {
                 name : 'Betsy Mougnagna'
             }
@@ -13,7 +14,6 @@ export const useUserStore = defineStore('user', {
     },
     actions: {
         async login(credentials) {
-            console.log('toto fait des galipètes avec ses reins')
             const token = (await apiRequester.post("/api/login", credentials)).data.token
 
             // Use the token for all future requests
@@ -23,12 +23,10 @@ export const useUserStore = defineStore('user', {
             this.user = (await apiRequester.get("/api/user/info")).data
             this.logged = true;
             router.push({ path: '/tactics' })
-            console.log(this)
         },
         async logOut(){
             this.logged = false;
             router.push({ path: '/login' })
-            console.log('toto mange de grands bols de bites')
         },
     }
 })

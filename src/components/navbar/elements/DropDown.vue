@@ -37,10 +37,9 @@ export default {
     emits: ['setTitle', 'resetTitle'],
     methods: {
         setParentTitle(title){
-            this.$emit('setTitle',title);
-        },
-        logout(){
-            this.$emit('resetTitle');
+            if(this.$userStore.logged == true){
+            this.$userStore.title = title;
+            }
         }
     }
 }

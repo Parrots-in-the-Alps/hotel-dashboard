@@ -31,7 +31,7 @@ export default {
     methods: {
         logout(){
             this.$userStore.logOut();
-            this.$emit('resetTitle');
+            this.$userStore.title = 'LOGIN';
         }
     }
 }

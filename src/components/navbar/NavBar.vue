@@ -4,7 +4,7 @@
         <DropDown @setTitle="this.setTitle"/>
       </div>
       <div class="centerDiv">
-          {{ this.title }}
+          {{ this.$userStore.title }}
       </div>
       <div class="rightDiv">
         <UserNavBar @resetTitle="resetTitle"/>
@@ -29,7 +29,7 @@ export default {
       }
     },
     resetTitle() {
-      this.title = 'login';
+      this.title = this.setTitle(title);
     }
   }
 }
