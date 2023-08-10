@@ -10,7 +10,7 @@
             <a-month-picker class="gap-20 success" placeholder="Mois en cours" @change="onChange" />
             <button type="button" class="gap-20" @click="onClick">Download to PDF</button>
         </div>
-        
+
         <div class="container-unique mb-25" v-if="error_message == null">
             <p>{{ error_message }}</p>
         </div>
@@ -24,7 +24,7 @@
                 </Line>
             </Card>
             <Card class="gap-20 mb-25" title="Temps d'accueil moyen"
-                v-if="precedently_month != null && currently_month != null">
+                v-if="clone_precedently_month != null && clone_currently_month != null">
                 <Line :height="'230px'" :width="'450px'" :colors="['#00E396', '#F5222D']"
                     :series="[{ name: 'truc 1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }, { name: 'truc 2', data: [120, 95, 90, 85, 80, 85, 90, 95, 65] }]">
                 </Line>
@@ -38,14 +38,14 @@
         </div>
 
         <div class="container-row-around">
-            <Card class="gap-20 mb-25" title="Taux de remplissage" v-if="reservations_by_months.fillingRate != null">
+            <Card class="gap-20 mb-25 gap-reverse-20" title="Taux de remplissage" v-if="reservations_by_months.fillingRate != null">
                 <RadialBar :labels="['']" :colors="['#F5222D']"
                     :series="[reservations_by_months.fillingRate < 1 ? 0 : reservations_by_months.fillingRate]"></RadialBar>
             </Card>
-            <Card title="chiffre d'affaire" class="mb-25"
-                v-if="reservations_by_months.turnover.precedently_month != null && reservations_by_months.turnover.currently_month != null">
+            <Card title="chiffre d'affaire" class="mb-25 gap-20"
+                v-if="reservations_by_months.turnover.precedently_month != false && reservations_by_months.turnover.currently_month != false">
                 <Bar :labels="['precedently month', 'currently month']"
-                    :series="[{ name: '', data: [reservations_by_months.turnover.precedently_month, reservations_by_months.turnover.currently_month] }]">
+                    :series="[{ name: '', data: [2988, 3560] }]">
                 </Bar>
             </Card>
             <Card title="Nombre de réservation" class="mb-25"
@@ -90,8 +90,8 @@ export default {
                     currently_month: null
                 },
                 turnover: {
-                    precedently_month: null,
-                    currently_month: null
+                    precedently_month: false,
+                    currently_month: false
                 }
             }
         }
@@ -130,8 +130,8 @@ export default {
             this.reservations_by_months.roomOccupancyRateInTheFuture.precedently_month = roomOccupancyRateInTheFuture(this.$dataStore.reservations_by_months.precedently_month);
             this.reservations_by_months.roomOccupancyRateInTheFuture.currently_month = roomOccupancyRateInTheFuture(this.$dataStore.reservations_by_months.currently_month);
             this.reservations_by_months.fillingRate = fillingRate();
-            this.reservations_by_months.turnover.precedently_month = moneyStats(this.$dataStore.reservations_by_months.precedently_month);
-            this.reservations_by_months.turnover.currently_month = moneyStats(this.$dataStore.reservations_by_months.currently_month);
+            this.reservations_by_months.turnover.precedently_month = true;
+            this.reservations_by_months.turnover.currently_month = true;
             this.reservations_by_months.numberOfReservations.precedently_month = numberOfReservations(this.$dataStore.reservations_by_months.precedently_month);
             this.reservations_by_months.numberOfReservations.currently_month = numberOfReservations(this.$dataStore.reservations_by_months.currently_month);
         }
@@ -181,6 +181,10 @@ export default {
 
 .mb-25 {
     margin-bottom: 25px;
+}
+
+.gap-reverse-20 {
+    margin-right: 20px;
 }
 
 .error {
