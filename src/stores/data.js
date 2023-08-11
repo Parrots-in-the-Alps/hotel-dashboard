@@ -16,8 +16,8 @@ export const useDataStore = defineStore('data', {
                 distributedCards:0,
                 todayCheckins:0,
                 todayCheckedins:0,
-                checkInStats:null,
-                resaToCheckIn:null,
+                checkInStats:[],
+                resaToCheckIn:[],
                 occupiedRooms:[],
                 availableRooms:[],
             },
@@ -80,11 +80,11 @@ export const useDataStore = defineStore('data', {
                     this.opsdata.resaToCheckIn = result.data.message.resaToCheckin;
                     this.opsdata.occupiedRooms = result.data.message.occupiedRooms;
                     this.opsdata.availableRooms = result.data.message.availableRooms;
+                    console.log('ici');
+                    console.log(this.opsdata.checkInStats);
                 }
             } catch (error) {
-                if (error.response.status != 200) {
-                    this.error_message = "error";
-                }   
+                console.log(error);  
             }
         }
     },

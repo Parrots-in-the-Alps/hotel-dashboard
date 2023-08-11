@@ -17,7 +17,7 @@
                         headStyle="background-color: #243236; color: #A7A9BE" class="card">
                         <div class="cardBody">
                             <Bar :height="'315px'" :width="'1150px'"  :labels="['08-09', '09-10', '10-11', '11-12', '12-13', '13-14','14-15','15-16','16-17','17-18','18-19']" :colors="['#6342f5']"
-              :series="[{ name: 'nombre', data: [12,0,0,12,0,0,12,12,0,0,50] }]"></Bar>
+              :series="[{ name: 'nombre', data: this.checkinCount }]"></Bar>
 
                         </div>
 
@@ -138,7 +138,7 @@ import Donut from '../../components/commons/chart/Donut.vue'
 import LineColumn from '../../components/commons/chart/LineColumn.vue'
 
 
-import {getCheckinPercentage} from'../../utils/ops_dashboard.js'
+import {getCheckinPercentage, getChekinPerHourCount} from'../../utils/ops_dashboard.js'
 import AvailableRooms from "../../components/commons/chart/AvailableRooms.vue";
 
 export default {
@@ -146,41 +146,49 @@ export default {
     mounted() {
         this.fetchReservationsData();
     },
-    data() {
-        return {
-            isLoading: false,
-            checkinPercentage: 0
-        };
+    data(){
+        return{
+            isLoading:false,
+            checkinPercentage:0,
+            checkinCount:null
+    }
     },
     methods: {
         onClick() {
             const dashboard = "ops_dashboard";
             dashboard2pdf(document.getElementById(dashboard), dashboard);
         },
-        async fetchReservationsData() {
-            this.isLoading = true;
-            const headers = {
-                'Content-Type': 'application/json',
-            };
-            try {
-                await this.$dataStore.getOpsData()
-                    .then(response => {
-                    this.checkinPercentage = getCheckinPercentage(this.$dataStore.opsdata.todayCheckins, this.$dataStore.opsdata.todayCheckedins);
-                    //   this.calculateOccupancyStats();
-                    //   this.calculateAverageDurationByRoomType();
-                    //   this.moneyStats();
-                    //   this.timeBetweenResaCheckIn();
-                    //   this.timeAcceuil();
-                    //   this.serviceStats();
-                }).finally(() => {
-                    this.isLoading = false;
-                });
-            }
-            catch (error) {
-                console.error(error);
-                this.isLoading = false;
-            }
+
+    async fetchReservationsData() {
+      this.isLoading = true;
+
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+        try {
+          await this.$dataStore.getOpsData()
+            .then(response => {
+                this.checkinPercentage = getCheckinPercentage(
+                    this.$dataStore.opsdata.todayCheckins,
+                     this.$dataStore.opsdata.todayCheckedins);
+                this.checkinCount = getChekinPerHourCount(
+                    this.$dataStore.opsdata.checkInStats);
+                    console.log("à(j(à(s)))");
+                    console.log(this.checkinCount);
+            //   this.calculateOccupancyStats();
+            //   this.calculateAverageDurationByRoomType();
+            //   this.moneyStats();
+            //   this.timeBetweenResaCheckIn();
+            //   this.timeAcceuil();
+            //   this.serviceStats();
+            }).finally(() => {
+              this.isLoading = false;
+            });
+        } catch (error) {
+          console.error(error);
+          this.isLoading = false;
         }
+      }
     },
     components: { AvailableRooms }
 }
