@@ -9,13 +9,15 @@ export function getCheckinPercentage(attendus,realises){
 }
 
 export function getChekinPerHourCount(object){
-    console.log(JSON.stringify(object));
-    let checkinCount = {"08":0, "09":0, "10":0,"11":0, "12":0, "13":0,"14":0, "15":0, "16":0, "17":0, "18":0, "19":0};
+    if(JSON.stringify(object) === []){
+        return checkinCountFinal[0,0,0,0,0,0,0,0,0,0,0,0]
+    }
+
     let checkinCountFinal = [];
+    let checkinCount = {"08":0, "09":0, "10":0,"11":0, "12":0, "13":0,"14":0, "15":0, "16":0, "17":0, "18":0, "19":0};
+    
     object.forEach(element => {
         let hour = translateHour(element.checkedinAt);
-        console.log("àdmlkfjqsdmflkjà(");
-        console.log(hour);
         checkinCount[hour]++;
         checkinCountFinal.push(checkinCount[hour]);
     });
